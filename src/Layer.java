@@ -4,7 +4,9 @@ import java.awt.*;
 public class Layer extends JPanel {
     Rectangle mainRectangle = null;
 
-    public Layer() {
+    public Layer(Rectangle cRect) {
+        setPreferredSize(new Dimension(cRect.sizex, cRect.sizey));
+        setDoubleBuffered(true);
         mainRectangle = new Rectangle(0, 0, 0, 0);
     }
 

@@ -18,7 +18,7 @@ public class Game extends Thread{
 
             // throttle
             try {
-                Thread.sleep(100);
+                Thread.sleep(1);
             } catch (Exception e) {
                 System.out.println(e);
             }
