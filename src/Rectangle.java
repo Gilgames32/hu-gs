@@ -13,6 +13,15 @@ public class Rectangle {
         y2 = y1 + sizey;
     }
 
+    public Rectangle(Point upperRight, Dimension size) {
+        x1 = upperRight.x;
+        y1 = upperRight.y;
+        sizex = size.width;
+        sizey = size.height;
+        x2 = x1 + sizex;
+        y2 = y1 + sizey;
+    }
+
     public Rectangle Overlap(Rectangle other) {
         Rectangle olrect = new Rectangle(0, 0, 0, 0);
         olrect.x1 = this.x1 > other.x1 ? this.x1 : other.x1;

@@ -5,17 +5,15 @@ import javax.swing.*;
 public class Window {
     JFrame frame = null;
     String title = null;
-    Rectangle rect = null;
     Layer mainLayer = null;
 
     public Window(String cTitle, Rectangle cRect) {
-        rect = cRect;
         frame = new JFrame(cTitle);
         mainLayer = new Layer(cRect);
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(rect.x1, rect.y1);
+        frame.setLocation(cRect.x1, cRect.y1);
         frame.setResizable(false);
         
         frame.add(mainLayer);
@@ -26,7 +24,6 @@ public class Window {
     }
 
     Rectangle getRectangle() {
-        rect.Regenerate(mainLayer.getLocationOnScreen(), mainLayer.getSize());
-        return rect;
+        return new Rectangle(mainLayer.getLocationOnScreen(), mainLayer.getSize());
     }
 }
