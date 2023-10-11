@@ -3,8 +3,8 @@ import java.awt.Toolkit;
 public class Game extends Thread{
     public void run() {
         System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
-        HWindow w1 = new HWindow("Window1", new Rectangle(500, 500, 800, 600));
-        HWindow w2 = new HWindow("Window2", new Rectangle(1300, 500, 800, 600));
+        Window w1 = new Window("Window1", new Rectangle(500, 500, 800, 600));
+        Window w2 = new Window("Window2", new Rectangle(1300, 500, 800, 600));
 
         while (true) {
             Rectangle ol = w1.getRectangle().Overlap(w2.getRectangle());

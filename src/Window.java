@@ -2,13 +2,13 @@
 
 import javax.swing.*;
 
-public class HWindow {
+public class Window {
     JFrame frame = null;
     String title = null;
     Rectangle rect = null;
     Layer mainLayer = null;
 
-    public HWindow(String cTitle, Rectangle cRect) {
+    public Window(String cTitle, Rectangle cRect) {
         rect = cRect;
         frame = new JFrame(cTitle);
         mainLayer = new Layer(cRect);
