@@ -1,5 +1,12 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GameObject {
-    void paintComponent(Graphics g) {}
+    int layer = 0;
+
+    protected ArrayList<GameObject> children = new ArrayList<GameObject>();
+
+    void draw(Graphics g) {}
+
+    void update() {}
 }

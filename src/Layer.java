@@ -19,7 +19,7 @@ public class Layer extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(mainRectangle.x1, mainRectangle.y1, mainRectangle.sizex, mainRectangle.sizey);
         for (GameObject child : children) {
-            child.paintComponent(g);
+            child.draw(g);
         }
     }
 
