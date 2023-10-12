@@ -4,6 +4,7 @@ public class Game implements Runnable{
     Thread gameThread;
     Window w1, w2;
     Layer l1, l2;
+    Player player = null;
 
 
     public void start() {
@@ -13,6 +14,7 @@ public class Game implements Runnable{
         w2 = new Window("Window2", new Rectangle(1300, 500, 800, 600));
         l1 = w1.mainLayer;
         l2 = w2.mainLayer;
+        player = new Player();
 
         gameThread = new Thread(this);
         gameThread.start();
@@ -20,11 +22,13 @@ public class Game implements Runnable{
 
     
     public void run() {
-        
+        // delta variables
         long lastTime = System.nanoTime();
         long currentTime;
         double drawInterwal = 1e9 / 90;
         double delta = 0;
+
+        l1.children.add(player);
         
         while (gameThread != null) {
             currentTime = System.nanoTime();
@@ -46,11 +50,11 @@ public class Game implements Runnable{
     }
 
     void update() {
-        Rectangle ol = w1.getRectangle().Overlap(w2.getRectangle());
+        Rectangle ol = w1.rect.Overlap(w2.rect);
         if (ol != null) {
             // System.out.println(ol);
-            l1.mainRectangle.Regenerate(ol.Relatively(w1.getRectangle()));
-            l2.mainRectangle.Regenerate(ol.Relatively(w2.getRectangle()));
+            l1.mainRectangle.Regenerate(ol.Relatively(w1.rect));
+            l2.mainRectangle.Regenerate(ol.Relatively(w2.rect));
         }
     }
 }
