@@ -9,6 +9,8 @@ public class Layer extends JPanel {
     public Layer(Rectangle cRect) {
         setPreferredSize(new Dimension(cRect.sizex, cRect.sizey));
         setDoubleBuffered(true);
+        setFocusable(true);
+
         mainRectangle = new Rectangle(0, 0, 0, 0);
         //setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     }

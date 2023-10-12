@@ -6,17 +6,27 @@ public class Game implements Runnable{
     ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
     Window w1, w2;
     Layer l1, l2;
+    KeyHandler keyHandler;
+    Player player;
 
 
 
     public void start() {
         System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
 
+        keyHandler = new KeyHandler();
+
         w1 = new Window("Window1", new Rectangle(500, 500, 800, 600));
         w2 = new Window("Window2", new Rectangle(1300, 500, 800, 600));
+        
         l1 = w1.mainLayer;
         l2 = w2.mainLayer;
-        gameObjects.add(new Player());
+        l1.addKeyListener(keyHandler);
+        l2.addKeyListener(keyHandler);
+        player = new Player();
+        player.keyHandler = keyHandler;
+
+        gameObjects.add(player);
 
         gameThread = new Thread(this);
         gameThread.start();
@@ -57,6 +67,9 @@ public class Game implements Runnable{
             // System.out.println(ol);
             l1.mainRectangle.Regenerate(ol.Relatively(w1.rect));
             l2.mainRectangle.Regenerate(ol.Relatively(w2.rect));
+        }
+        for (GameObject gameObject : gameObjects) {
+            gameObject.update();
         }
     }
 }

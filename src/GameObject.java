@@ -8,5 +8,9 @@ public class GameObject {
 
     void draw(Graphics g) {}
 
-    void update() {}
+    void update() {
+        for (GameObject gameObject : children) {
+            gameObject.update();
+        }
+    }
 }
