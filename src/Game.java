@@ -1,7 +1,9 @@
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class Game implements Runnable{
+public class Game implements Runnable {
     Thread gameThread;
     ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
     Window w1, w2;
@@ -34,32 +36,16 @@ public class Game implements Runnable{
 
     
     public void run() {
-        // delta variables
-        long lastTime = System.nanoTime();
-        long currentTime;
-        double drawInterwal = 1e9 / 90;
-        double delta = 0;
-        
-        long deltaTime = 0;
+        int FPS = 90;
+        // deltaTime in miliseconds
+        long deltaTime = Math.round(1000/FPS);
         
         l1.children.add(gameObjects.getFirst());
-        
-        while (gameThread != null) {
-            currentTime = System.nanoTime();
-            // this way delta is a 0-1 scale indicating how far we are till the next update
-            delta += (currentTime - lastTime) / drawInterwal;
-            deltaTime += currentTime - lastTime;
-            lastTime = currentTime;
 
-            // whenthe scale is over 1 we can 
-            if (delta > 1) {
-                delta--;
-                // System.out.println(1.0/deltaTime*1e9);
-                deltaTime = 0;
-                
-
-
-
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
                 // update
                 update();
 
@@ -67,7 +53,7 @@ public class Game implements Runnable{
                 l1.repaint();
                 l2.repaint();
             }
-        }
+        }, 0, deltaTime);
     }
 
 
