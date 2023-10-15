@@ -40,16 +40,25 @@ public class Game implements Runnable{
         double drawInterwal = 1e9 / 90;
         double delta = 0;
         
+        long deltaTime = 0;
+        
         l1.children.add(gameObjects.getFirst());
         
         while (gameThread != null) {
             currentTime = System.nanoTime();
             // this way delta is a 0-1 scale indicating how far we are till the next update
             delta += (currentTime - lastTime) / drawInterwal;
+            deltaTime += currentTime - lastTime;
             lastTime = currentTime;
+
             // whenthe scale is over 1 we can 
             if (delta > 1) {
                 delta--;
+                // System.out.println(1.0/deltaTime*1e9);
+                deltaTime = 0;
+                
+
+
 
                 // update
                 update();
@@ -60,6 +69,8 @@ public class Game implements Runnable{
             }
         }
     }
+
+
 
     void update() {
         Rectangle ol = w1.rect.Overlap(w2.rect);

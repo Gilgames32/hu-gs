@@ -23,6 +23,7 @@ public class Layer extends JPanel {
         for (GameObject child : children) {
             child.draw(g);
         }
+        g.dispose();
     }
 
     void onWindowDrag() {
