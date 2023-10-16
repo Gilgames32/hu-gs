@@ -52,6 +52,7 @@ public class Game implements Runnable {
                 // draw
                 l1.repaint();
                 l2.repaint();
+                Toolkit.getDefaultToolkit().sync();
             }
         }, 0, deltaTime);
     }
