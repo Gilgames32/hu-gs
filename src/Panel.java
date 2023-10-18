@@ -20,7 +20,7 @@ public class Panel extends JPanel {
     }
 
     public void onWindowDrag() {
-        rect.Regenerate(getLocationOnScreen(), getSize());
+        rect.regenerate(getLocationOnScreen(), getSize());
     }
 
     @Override

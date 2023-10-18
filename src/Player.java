@@ -11,7 +11,8 @@ public class Player extends GameObject {
     @Override
     protected void draw(Graphics g, Rectangle windowPosition) {
         g.setColor(Color.RED);
-        g.fillRect(rect.x1, rect.y1, rect.sizex, rect.sizey);
+        Rectangle relativeRect = rect.relativeTo(windowPosition);
+        g.fillRect(relativeRect.x1, relativeRect.y1, relativeRect.sizex, relativeRect.sizey);
     }
 
     @Override

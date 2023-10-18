@@ -22,7 +22,7 @@ public class Rectangle {
         y2 = y1 + sizey;
     }
 
-    public Rectangle Overlap(Rectangle other) {
+    public Rectangle overlap(Rectangle other) {
         Rectangle olrect = new Rectangle(0, 0, 0, 0);
         olrect.x1 = this.x1 > other.x1 ? this.x1 : other.x1;
         olrect.x2 = this.x2 < other.x2 ? this.x2 : other.x2;
@@ -40,7 +40,7 @@ public class Rectangle {
         return olrect;
     }
 
-    public void Regenerate(Point upperRight, Dimension size) {
+    public void regenerate(Point upperRight, Dimension size) {
         x1 = upperRight.x;
         y1 = upperRight.y;
         sizex = size.width;
@@ -49,7 +49,7 @@ public class Rectangle {
         y2 = y1 + sizey;
     }
 
-    public void Regenerate(Rectangle other) {
+    public void regenerate(Rectangle other) {
         x1 = other.x1;
         y1 = other.y1;
         sizex = other.sizex;
@@ -58,7 +58,7 @@ public class Rectangle {
         y2 = other.y2;
     }
 
-    public void Regenerate(int x, int y, int width, int height) {
+    public void regenerate(int x, int y, int width, int height) {
         x1 = x;
         y1 = y;
         sizex = width;
@@ -71,7 +71,7 @@ public class Rectangle {
         return String.format("x1: %s\ty1: %s\tx2: %s\ty2: %s\tsizex: %s\tsizey: %s", x1, y1, x2, y2, sizex, sizey);
     }
 
-    public Rectangle Relatively(Rectangle other) {
+    public Rectangle relativeTo(Rectangle other) {
         return new Rectangle(x1 - other.x1, y1 - other.y1, sizex, sizey);
     }
 }
