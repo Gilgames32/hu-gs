@@ -1,16 +1,20 @@
 import java.util.ArrayList;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 
 public class World implements Runnable {
     static ArrayList<Window> windows = new ArrayList<Window>();
-    Thread gameThread;
-    static KeyHandler input = new KeyHandler();
+    static KeyHandler keyboard = new KeyHandler();
+    static MouseHandler mouse = new MouseHandler();
     static ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+    
+    Thread gameThread;
 
     public void start() {
         // start stuff here idk
         // for now we use this for initialization
         windows.add(new Window("UWU", new Rectangle(1000, 600, 800, 600)));
+        windows.add(new Window("OwO", new Rectangle(1000+800, 600, 800, 600)));
         gameObjects.add(new Player());
 
 
@@ -66,6 +70,14 @@ public class World implements Runnable {
         // repaint components
         for (Window window : windows) {
             window.frame.repaint();
+        }
+    }
+
+    public static void mouseClicked(MouseEvent e) {
+        for (Window window : windows) {
+            if (window.frame.isActive()) {
+                window.panel.mouseClicked(e);
+            }
         }
     }
 }

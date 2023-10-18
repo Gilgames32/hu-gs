@@ -74,4 +74,8 @@ public class Rectangle {
     public Rectangle relativeTo(Rectangle other) {
         return new Rectangle(x1 - other.x1, y1 - other.y1, sizex, sizey);
     }
+
+    public boolean isPointInside(Point p) {
+        return p.x > x1 && p.x < x2 && p.y > y1 && p.y < y2;
+    }
 }

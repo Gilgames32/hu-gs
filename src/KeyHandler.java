@@ -18,6 +18,11 @@ public class KeyHandler implements KeyListener {
         if (s) axisy += 1;
         return axisy;
     }
+
+    public void releaseAll() {
+        // this line looks kinda cool
+        w = a = s = d = false;
+    }
     
     public void keyTyped(KeyEvent event){}
 

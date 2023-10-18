@@ -7,26 +7,34 @@ public class Window {
     JFrame frame = null;
     String title = null;
     Panel panel = null;
-    Rectangle rect = null;
+
+    // maybe gameobject?
 
     // bool draggable
 
     public Window(String title, Rectangle initRect) {
-        rect = initRect;
         frame = new JFrame(title);
         panel = new Panel(initRect);
-        
+
         // link panel to frame
         frame.add(panel);
 
         // set up listeners
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addComponentListener(new ComponentAdapter() {
             public void componentMoved(final ComponentEvent e) {
                 onWindowDrag();
             }
         });
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent e) {
+                onWindowDrag();
+            }
+            public void windowLostFocus(WindowEvent e) {
+                // stuff
+            }
+        });
+        
         // set size and location
         frame.setLocation(initRect.x1, initRect.y1);
         // frame.setSize(rect.sizex, rect.sizey); // size is automatically set by making the panel fit
@@ -38,7 +46,16 @@ public class Window {
     }
 
     void onWindowDrag() {
-        panel.onWindowDrag();
+        try {
+            panel.getLocationOnScreen();
+        } catch (Exception e) {
+            // first frame will always complain
+            System.out.println(e);
+            return;
+        }
+
+        panel.onWindowDrag(this);
     }
+
 
 }
