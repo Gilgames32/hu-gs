@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 
@@ -32,21 +34,14 @@ public class World implements Runnable {
     }
 
     public void run() {
-        // delta variables
-        long lastTime = System.nanoTime();
-        long currentTime;
-        double drawInterwal = 1e9 / 90;
-        double delta = 0;
-        
-        while (gameThread != null) {
-            currentTime = System.nanoTime();
-            // this way delta is a 0-1 scale indicating how far we are till the next update
-            delta += (currentTime - lastTime) / drawInterwal;
-            lastTime = currentTime;
+        int FPS = 90;
+        // deltaTime in miliseconds
+        long deltaTime = Math.round(1000/FPS);
 
-            // whenthe scale is over 1 we can call it a frame
-            if (delta > 1) {
-                delta--;              
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
                 // update
                 update();
                 // redraw
@@ -55,7 +50,7 @@ public class World implements Runnable {
                 // the 1 line of code that took me 6 hours to debug:
                 Toolkit.getDefaultToolkit().sync();
             }
-        }
+        }, 0, deltaTime);
     }
 
     public void update(){
