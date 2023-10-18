@@ -6,13 +6,18 @@ import javax.swing.*;
 public class Window {
     JFrame frame = null;
     String title = null;
-    Layer mainLayer = null;
+    Panel panel = null;
     Rectangle rect = null;
 
-    public Window(String cTitle, Rectangle cRect) {
-        rect = cRect;
-        frame = new JFrame(cTitle);
-        mainLayer = new Layer(cRect);
+    // bool draggable
+
+    public Window(String title, Rectangle initRect) {
+        rect = initRect;
+        frame = new JFrame(title);
+        panel = new Panel(initRect);
+        
+        // link panel to frame
+        frame.add(panel);
 
         // set up listeners
         frame.addComponentListener(new ComponentAdapter() {
@@ -20,28 +25,20 @@ public class Window {
                 onWindowDrag();
             }
         });
-
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(cRect.x1, cRect.y1);
+
+        // set size and location
+        frame.setLocation(initRect.x1, initRect.y1);
+        // frame.setSize(rect.sizex, rect.sizey); // size is automatically set by making the panel fit
         frame.setResizable(false);
         
-        frame.add(mainLayer);
+        // finalize
         frame.pack();
-        
         frame.setVisible(true);
-        //frame.setSize(rect.sizex, rect.sizey);
     }
 
     void onWindowDrag() {
-        try {
-            rect.Regenerate(mainLayer.getLocationOnScreen(), mainLayer.getSize());
-        } catch (Exception e) {
-            // will always throw error the first frame
-            System.out.println(e);
-        }
-        
-        mainLayer.onWindowDrag();
+        panel.onWindowDrag();
     }
 
 }

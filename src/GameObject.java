@@ -6,7 +6,13 @@ public class GameObject {
 
     protected ArrayList<GameObject> children = new ArrayList<GameObject>();
 
-    void draw(Graphics g) {}
+    void draw(Graphics g, Rectangle windowPosition) {
+        // code
+    }
+
+    void start() {
+        
+    }
 
     void update() {
         for (GameObject gameObject : children) {
