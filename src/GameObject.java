@@ -5,7 +5,7 @@ public class GameObject {
     int layer = 0;
     Rectangle rect = null;
 
-    protected ArrayList<GameObject> children = new ArrayList<GameObject>();
+    protected ArrayList<GameObject> children = new ArrayList<>();
 
     void draw(Graphics g, Rectangle windowPosition) {
         if (rect != null) {

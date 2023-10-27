@@ -5,10 +5,10 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 
 public class World implements Runnable {
-    static ArrayList<Window> windows = new ArrayList<Window>();
+    static ArrayList<Window> windows = new ArrayList<>();
     static KeyHandler keyboard = new KeyHandler();
     static MouseHandler mouse = new MouseHandler();
-    static ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+    static ArrayList<GameObject> gameObjects = new ArrayList<>();
     
     Thread gameThread;
 

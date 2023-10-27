@@ -10,7 +10,7 @@ public class Panel extends JPanel {
     Rectangle rect;
 
     // storing where its currently overlapping
-    ArrayList<Intersection> intersections = new ArrayList<Intersection>();
+    ArrayList<Intersection> intersections = new ArrayList<>();
 
     public Panel(Rectangle initRect) {
         rect = initRect;

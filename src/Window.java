@@ -22,6 +22,7 @@ public class Window {
         // set up listeners
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addComponentListener(new ComponentAdapter() {
+            @Override
             public void componentMoved(final ComponentEvent e) {
                 onWindowDrag();
             }

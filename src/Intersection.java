@@ -10,6 +10,7 @@ public class Intersection extends GameObject {
         parentWindow = window;
     }
 
+    @Override
     void draw(Graphics g, Rectangle windowPosition) {
         g.setColor(Color.CYAN);
         super.draw(g, windowPosition);
