@@ -71,8 +71,14 @@ public class Rectangle {
         return String.format("x1: %s\ty1: %s\tx2: %s\ty2: %s\tsizex: %s\tsizey: %s", x1, y1, x2, y2, sizex, sizey);
     }
 
+    // subtract
     public Rectangle relativeTo(Rectangle other) {
         return new Rectangle(x1 - other.x1, y1 - other.y1, sizex, sizey);
+    }
+
+    // add
+    public Rectangle toRelative(Rectangle other) {
+        return new Rectangle(x1 + other.x1, y1 + other.y1, sizex, sizey);
     }
 
     public boolean isPointInside(Point p) {

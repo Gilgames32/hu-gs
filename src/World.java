@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 
 public class World implements Runnable {
@@ -17,7 +16,7 @@ public class World implements Runnable {
         // for now we use this for initialization
         windows.add(new Window("UWU", new Rectangle(100, 100, 400, 300)));
         windows.add(new Window("OwO", new Rectangle(100+400, 100, 400, 300)));
-        gameObjects.add(new Player(new Rectangle(100, 100, 64, 64)));
+        gameObjects.add(new Player((new Rectangle(0, 32, 64, 64)).toRelative(windows.get(0).panel.rect)));
 
 
 
@@ -48,7 +47,8 @@ public class World implements Runnable {
                 redraw();
                 
                 // the 1 line of code that took me 6 hours to debug:
-                Toolkit.getDefaultToolkit().sync();
+                // this one actually makes it laggier on windows
+                // Toolkit.getDefaultToolkit().sync();
             }
         }, 0, deltaTime);
     }
