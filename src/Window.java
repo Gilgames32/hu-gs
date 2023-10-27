@@ -9,10 +9,10 @@ public class Window {
     String title = null;
     Panel panel = null;
     Point windowPos = null;
-
-    // maybe gameobject?
-
     boolean draggable = true;
+
+    GameObject gameObject = null;
+
 
     public Window(String title, Rectangle initRect) {
         frame = new JFrame(title);
@@ -35,7 +35,7 @@ public class Window {
             }
 
             public void windowLostFocus(WindowEvent e) {
-                // stuff
+                onWindowDrag();
             }
         });
 
@@ -49,6 +49,11 @@ public class Window {
         // finalize
         frame.pack();
         frame.setVisible(true);
+
+        // initialize gameobject
+        gameObject = new GameObject();
+        // we dont have to worry about it getting drawn because the size is 0, 0
+        gameObject.rect = new Rectangle(initRect.getX1(), initRect.getY1(), 0, 0);
     }
 
     void onWindowDrag() {

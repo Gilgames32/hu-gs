@@ -19,6 +19,11 @@ public class World implements Runnable {
         windows.add(new Window("OwO", new Rectangle(100 + 400, 100, 400, 300)));
         gameObjects.add(new Player(new Rectangle(100, 100, 64, 64)));
 
+        // add windows to gameobjects
+        for (Window window : windows) {
+            gameObjects.add(window.gameObject);
+        }
+
         // initalize gameobjects
         for (GameObject gameObject : gameObjects) {
             gameObject.start();

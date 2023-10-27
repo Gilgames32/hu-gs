@@ -20,5 +20,22 @@ public class Player extends GameObject {
         super.update();
         rect.x += World.keyboard.getAxisX() * speed;
         rect.y += World.keyboard.getAxisY() * speed;
+        System.out.println(inWindows());
+    }
+
+    int inWindows() {
+        int windownCount = 0;
+        for (Window window : World.windows) {
+            if (rect.overlap(window.panel.rect) != null) {
+                windownCount++;
+            }
+        }
+
+        for (Window window : World.windows) {
+            // this will set draggable true if its in less than two windows or the player is not in that window
+            window.draggable = rect.overlap(window.panel.rect) == null || windownCount < 2;
+        }
+
+        return windownCount;
     }
 }
