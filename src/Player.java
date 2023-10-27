@@ -3,8 +3,8 @@ import java.awt.*;
 public class Player extends GameObject {
     double speed = 10;
     
-    public Player() {
-        rect = new Rectangle(1000, 800, 100, 100);
+    public Player(Rectangle prect) {
+        rect = prect;
         
     }
 
