@@ -42,8 +42,8 @@ public class Window {
         // set size and location
         windowPos = new Point(initRect.getX1(), initRect.getY1());
         frame.setLocation(windowPos);
-        // frame.setSize(rect.sizex, rect.sizey); // size is automatically set by making
-        // the panel fit
+        // frame.setSize(rect.sizex, rect.sizey);
+        // size is automatically set by making the panel fit
         frame.setResizable(false);
 
         // finalize
@@ -52,14 +52,12 @@ public class Window {
     }
 
     void onWindowDrag() {
-        // this is to not get errors on the first few frames due to some desktop
-        // environments
+        // this is to not get errors on the first few frames due to some desktop environments
         if (frame.isShowing()) {
             if (draggable) {
                 windowPos = frame.getLocationOnScreen();
                 panel.onWindowDrag(this);
-            }
-            else {
+            } else {
                 frame.setLocation(windowPos);
             }
 

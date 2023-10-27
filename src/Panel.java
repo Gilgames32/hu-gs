@@ -59,6 +59,10 @@ public class Panel extends JPanel {
 
     }
 
+    public boolean isOverlapping() {
+        return intersections.size() == 0;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         // parent
