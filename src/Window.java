@@ -13,7 +13,6 @@ public class Window {
 
     GameObject gameObject = null;
 
-
     public Window(String title, Rectangle initRect) {
         frame = new JFrame(title);
         panel = new Panel(initRect);
@@ -57,7 +56,8 @@ public class Window {
     }
 
     void onWindowDrag() {
-        // this is to not get errors on the first few frames due to some desktop environments
+        // this is to not get errors on the first few frames due to some desktop
+        // environments
         if (frame.isShowing()) {
             if (draggable) {
                 windowPos = frame.getLocationOnScreen();

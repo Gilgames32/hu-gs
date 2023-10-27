@@ -73,7 +73,6 @@ public class World implements Runnable {
         } else {
             player.color = Color.BLUE;
         }
-        // System.out.println(player.rect);
     }
 
     public void redraw() {

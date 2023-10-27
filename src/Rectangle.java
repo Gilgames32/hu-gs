@@ -44,14 +44,13 @@ public class Rectangle {
         y = upperRightY;
     }
 
-
     public Rectangle overlap(Rectangle other) {
         int x1 = this.getX1() > other.getX1() ? this.getX1() : other.getX1();
         int x2 = this.getX2() < other.getX2() ? this.getX2() : other.getX2();
         int y1 = this.getY1() > other.getY1() ? this.getY1() : other.getY1();
         int y2 = this.getY2() < other.getY2() ? this.getY2() : other.getY2();
-        
-        Rectangle olrect = new Rectangle(x1, y1, x2-x1, y2-y1);
+
+        Rectangle olrect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
 
         // invalid size -> they are not overlapping
         if (olrect.sizeX <= 0 || olrect.sizeY <= 0) {
@@ -69,7 +68,8 @@ public class Rectangle {
     }
 
     public String toString() {
-        return String.format("x1: %s\ty1: %s\tx2: %s\ty2: %s\tsizex: %s\tsizey: %s", getX1(), getY1(), getX2(), getY2(), sizeX, sizeY);
+        return String.format("x1: %s\ty1: %s\tx2: %s\ty2: %s\tsizex: %s\tsizey: %s", getX1(), getY1(), getX2(), getY2(),
+                sizeX, sizeY);
     }
 
     // subtract

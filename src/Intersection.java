@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public class Intersection extends GameObject {
     Window parentWindow;
-    
+
     public Intersection(Rectangle initRect, Window window) {
         rect = initRect;
         parentWindow = window;
@@ -16,8 +16,9 @@ public class Intersection extends GameObject {
         super.draw(g, windowPosition);
     }
 
-    void onClick(){
-        // BUG BELOW or idk cant find out why windows get placed above the actual y coordinate
+    void onClick() {
+        // known bug: some (tested on cinnamon) desktop environments get the coordinates
+        // wrong
 
         // move it wherever its closer
         if (rect.sizeX > rect.sizeY) {
@@ -35,5 +36,4 @@ public class Intersection extends GameObject {
         }
     }
 
-    
 }
