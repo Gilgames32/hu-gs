@@ -2,6 +2,7 @@ import java.awt.*;
 
 public class Player extends GameObject {
     double speed = 10;
+    Color color = Color.RED;
     
     public Player(Rectangle prect) {
         rect = prect;
@@ -10,14 +11,14 @@ public class Player extends GameObject {
 
     @Override
     protected void draw(Graphics g, Rectangle windowPosition) {
-        g.setColor(Color.RED);
+        g.setColor(color);
         super.draw(g, windowPosition);
     }
 
     @Override
     void update() {
         super.update();
-        rect.x1 += World.keyboard.getAxisX() * speed;
-        rect.y1 += World.keyboard.getAxisY() * speed;
+        rect.x += World.keyboard.getAxisX() * speed;
+        rect.y += World.keyboard.getAxisY() * speed;
     }
 }

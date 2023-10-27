@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 public class World implements Runnable {
@@ -16,7 +17,7 @@ public class World implements Runnable {
         // for now we use this for initialization
         windows.add(new Window("UWU", new Rectangle(100, 100, 400, 300)));
         windows.add(new Window("OwO", new Rectangle(100+400, 100, 400, 300)));
-        gameObjects.add(new Player((new Rectangle(0, 32, 64, 64)).toRelative(windows.get(0).panel.rect)));
+        gameObjects.add(new Player(new Rectangle(100, 100, 64, 64)));
 
 
 
@@ -59,6 +60,16 @@ public class World implements Runnable {
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
         }
+
+        Player player = (Player)gameObjects.get(0);
+        Rectangle windowRect = windows.get(0).panel.rect;
+        if (windowRect.isRectangleInside(player.rect)) {
+            player.color = Color.RED;
+        }
+        else{
+            player.color = Color.BLUE;
+        }
+        // System.out.println(player.rect);
     }
 
     public void redraw() {

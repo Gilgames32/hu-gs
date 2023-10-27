@@ -20,17 +20,17 @@ public class Intersection extends GameObject {
         // BUG BELOW or idk cant find out why windows get placed above the actual y coordinate
 
         // move it wherever its closer
-        if (rect.sizex > rect.sizey) {
+        if (rect.sizeX > rect.sizeY) {
             Point pos = parentWindow.frame.getLocation();
             // offset depending on direction
-            pos.y += rect.y1 == parentWindow.panel.rect.y1 ? rect.sizey : -rect.sizey;
+            pos.y += rect.getY1() == parentWindow.panel.rect.getY1() ? rect.sizeY : -rect.sizeY;
             // epic fix xd
             // pos.y += 18;
             parentWindow.frame.setLocation(pos);
         } else {
             Point pos = parentWindow.frame.getLocation();
             // offset depending on direction
-            pos.x += rect.x1 == parentWindow.panel.rect.x1 ? rect.sizex : -rect.sizex;
+            pos.x += rect.getX1() == parentWindow.panel.rect.getX1() ? rect.sizeX : -rect.sizeX;
             parentWindow.frame.setLocation(pos);
         }
     }

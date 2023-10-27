@@ -15,7 +15,7 @@ public class Panel extends JPanel {
     public Panel(Rectangle initRect) {
         rect = initRect;
 
-        setPreferredSize(new Dimension(initRect.sizex, initRect.sizey));
+        setPreferredSize(new Dimension(initRect.sizeX, initRect.sizeY));
         setDoubleBuffered(true);
         setFocusable(true);
 

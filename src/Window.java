@@ -40,7 +40,7 @@ public class Window {
         });
 
         // set size and location
-        windowPos = new Point(initRect.x1, initRect.y1);
+        windowPos = new Point(initRect.getX1(), initRect.getY1());
         frame.setLocation(windowPos);
         // frame.setSize(rect.sizex, rect.sizey); // size is automatically set by making
         // the panel fit

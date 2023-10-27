@@ -10,7 +10,7 @@ public class GameObject {
     void draw(Graphics g, Rectangle windowPosition) {
         if (rect != null) {
             Rectangle relativeRect = rect.relativeTo(windowPosition);
-            g.fillRect(relativeRect.x1, relativeRect.y1, relativeRect.sizex, relativeRect.sizey);
+            g.fillRect(relativeRect.getX1(), relativeRect.getY1(), relativeRect.sizeX, relativeRect.sizeY);
         }
 
     }
