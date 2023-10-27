@@ -19,6 +19,7 @@ public class Player extends GameObject {
         super.update();
         rect.x += World.keyboard.getAxisX() * speed;
         rect.y += World.keyboard.getAxisY() * speed;
+        inWindows();
     }
 
     int inWindows() {
