@@ -1,3 +1,5 @@
+package util;
+
 import java.awt.*;
 
 public class Rectangle {
@@ -44,6 +46,26 @@ public class Rectangle {
         y = upperRightY;
     }
 
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
+
+    public void setSizeX(int width) {
+        x = width;
+    }
+
+    public void setSizeY(int height) {
+        y = height;
+    }
+
+    public Coord toCoord() {
+        return new Coord(x, y);
+    }
+
     public Rectangle overlap(Rectangle other) {
         int x1 = this.getX1() > other.getX1() ? this.getX1() : other.getX1();
         int x2 = this.getX2() < other.getX2() ? this.getX2() : other.getX2();
@@ -77,9 +99,17 @@ public class Rectangle {
         return new Rectangle(getX1() - other.getX1(), getY1() - other.getY1(), sizeX, sizeY);
     }
 
+    public Rectangle relativeTo(Coord other) {
+        return new Rectangle(getX1() - other.x, getY1() - other.y, sizeX, sizeY);
+    }
+
     // add
     public Rectangle toRelative(Rectangle other) {
         return new Rectangle(getX1() + other.getX1(), getY1() + other.getY1(), sizeX, sizeY);
+    }
+
+    public Rectangle toRelative(Coord other) {
+        return new Rectangle(getX1() + other.x, getY1() + other.y, sizeX, sizeY);
     }
 
     public boolean isPointInside(Point p) {

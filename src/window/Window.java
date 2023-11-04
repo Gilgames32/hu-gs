@@ -1,17 +1,21 @@
+package window;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-public class Window {
-    JFrame frame = null;
-    String title = null;
-    Panel panel = null;
-    Point windowPos = null;
-    boolean draggable = true;
+import engine.GameObject;
+import util.Rectangle;
 
-    GameObject gameObject = null;
+public class Window {
+    public JFrame frame = null;
+    String title = null;
+    public Panel panel = null;
+    Point windowPos = null;
+    public boolean draggable = true;
+
+    public GameObject gameObject = null;
 
     public Window(String title, Rectangle initRect) {
         frame = new JFrame(title);
@@ -50,9 +54,7 @@ public class Window {
         frame.setVisible(true);
 
         // initialize gameobject
-        gameObject = new GameObject();
-        // we dont have to worry about it getting drawn because the size is 0, 0
-        gameObject.rect = new Rectangle(initRect.getX1(), initRect.getY1(), 0, 0);
+        gameObject = new GameObject(0, 0);
     }
 
     void onWindowDrag() {

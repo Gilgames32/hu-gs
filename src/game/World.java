@@ -1,23 +1,35 @@
+package game;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.Color;
+
+import window.*;
+import engine.*;
+import engine.components.*;
+import util.*;
+
 import java.awt.event.MouseEvent;
 
 public class World implements Runnable {
-    static ArrayList<Window> windows = new ArrayList<>();
-    static KeyHandler keyboard = new KeyHandler();
-    static MouseHandler mouse = new MouseHandler();
-    static ArrayList<GameObject> gameObjects = new ArrayList<>();
+    static public ArrayList<Window> windows = new ArrayList<>();
+    static public KeyHandler keyboard = new KeyHandler();
+    static public MouseHandler mouse = new MouseHandler();
+    static public ArrayList<GameObject> gameObjects = new ArrayList<>();
 
     Thread gameThread;
 
     public void start() {
         // start stuff here idk
         // for now we use this for initialization
-        windows.add(new Window("UWU", new Rectangle(100, 100, 400, 300)));
+        windows.add(new Window("UwU", new Rectangle(100, 100, 400, 300)));
         windows.add(new Window("OwO", new Rectangle(100 + 400, 100, 400, 300)));
-        gameObjects.add(new Player(new Rectangle(100, 100, 64, 64)));
+        GameObject player = new GameObject(200, 200);
+        player.addComponent(new Transform(100, 100));
+        player.addComponent(new BoxCollider());
+        player.addComponent(new Box());
+        player.addComponent(new Player());
+
+        gameObjects.add(player);
 
         // add windows to gameobjects
         for (Window window : windows) {
@@ -64,14 +76,6 @@ public class World implements Runnable {
         // update should follow the top down hierarchy
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
-        }
-
-        Player player = (Player) gameObjects.get(0);
-        Rectangle windowRect = windows.get(0).panel.rect;
-        if (windowRect.isRectangleInside(player.rect)) {
-            player.color = Color.RED;
-        } else {
-            player.color = Color.BLUE;
         }
     }
 

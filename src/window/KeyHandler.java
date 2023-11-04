@@ -1,3 +1,4 @@
+package window;
 import java.awt.event.*;
 
 public class KeyHandler implements KeyListener {

@@ -1,21 +1,28 @@
-import java.awt.*;
+package window;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+
+import engine.GameObject;
+import engine.components.Intersection;
+import game.World;
+import util.*;
 
 public class Panel extends JPanel {
     // some data structure for stuff to draw:
     // probably gotta make one small list for global stuff like player
     // and a local stuff like a tilemap or some
-    Rectangle rect;
+    public Rectangle rect;
 
     // storing where its currently overlapping
-    ArrayList<Intersection> intersections = new ArrayList<>();
+    ArrayList<GameObject> intersections = new ArrayList<>();
 
     public Panel(Rectangle initRect) {
         rect = initRect;
 
-        setPreferredSize(new Dimension(initRect.sizeX, initRect.sizeY));
+        setPreferredSize(new Dimension(initRect.getSizeX(), initRect.getSizeY()));
         setDoubleBuffered(true);
         setFocusable(true);
 
@@ -52,7 +59,8 @@ public class Panel extends JPanel {
             if (overlapRect == null) {
                 continue;
             } else {
-                intersections.add(new Intersection(overlapRect, window));
+                GameObject isec = new GameObject(0, 0);
+                isec.addComponent(new Intersection(overlapRect, window));
             }
 
         }
@@ -69,23 +77,25 @@ public class Panel extends JPanel {
         super.paintComponent(g);
 
         // self
-        for (Intersection intersection : intersections) {
-            intersection.draw(g, rect);
+        for (GameObject intersection : intersections) {
+            intersection.draw(g, rect.toCoord().multiply(-1));
         }
 
         // children
         // loop thru stuff and use their draw
         for (GameObject gameObject : World.gameObjects) {
-            gameObject.draw(g, rect);
+            gameObject.draw(g, rect.toCoord().multiply(-1));
         }
     }
 
     public void mouseClicked(MouseEvent e) {
-        for (Intersection isec : intersections) {
+        /*
+        for (GameObject isec : intersections) {
             if (isec.rect.relativeTo(rect).isPointInside(e.getPoint())) {
                 isec.onClick();
             }
         }
+        */
 
     }
 
