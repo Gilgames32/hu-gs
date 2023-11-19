@@ -55,11 +55,11 @@ public class Rectangle {
     }
 
     public void setSizeX(int width) {
-        x = width;
+        sizeX = width;
     }
 
     public void setSizeY(int height) {
-        y = height;
+        sizeY = height;
     }
 
     public Coord toCoord() {

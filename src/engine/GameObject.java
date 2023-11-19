@@ -55,7 +55,6 @@ public class GameObject {
                 return type.cast(component);
             }
         }
-        System.out.println("No such component:" + type.getName());
         return null;
     }
 

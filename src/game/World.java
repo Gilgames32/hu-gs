@@ -24,12 +24,23 @@ public class World implements Runnable {
         windows.add(new Window("UwU", new Rectangle(100, 100, 400, 300)));
         windows.add(new Window("OwO", new Rectangle(100 + 400, 100, 400, 300)));
         GameObject player = new GameObject(200, 200);
-        player.addComponent(new Transform(100, 100));
+        player.addComponent(new Transform(50, 50));
         player.addComponent(new BoxCollider());
         player.addComponent(new Box());
         player.addComponent(new Player());
-
+        player.addComponent(new Rigidbody());
         gameObjects.add(player);
+        
+        GameObject box = new GameObject(300, 300);
+        box.addComponent(new Transform(100, 100));
+        box.addComponent(new BoxCollider());
+        box.addComponent(new Box());
+        gameObjects.add(box);
+
+
+
+
+
 
         // add windows to gameobjects
         for (Window window : windows) {

@@ -13,4 +13,8 @@ public class Transform extends GameComponent {
         rect = new Rectangle(-sizeX/2, -sizeY/2, sizeX, sizeY);
     }
 
+    public Rectangle getAbsoluteRectangle() {
+        return new Rectangle(gameObject.position.x + rect.getX1(), gameObject.position.y + rect.getY1(), rect.getSizeX(), rect.getSizeY());
+    }
+
 }

@@ -6,7 +6,7 @@ import window.Window;
 import util.*;
 
 public class Player extends GameComponent {
-    double speed = 10;
+    double speed = 5;
     BoxCollider collider;
     Color color;
 
@@ -19,13 +19,9 @@ public class Player extends GameComponent {
 
     @Override
     public void update() {
-        super.update();
-        
         inWindows();
-        gameObject.position.x += World.keyboard.getAxisX() * speed;
-        gameObject.position.y += World.keyboard.getAxisY() * speed;
-
-        collisionCheck();
+        gameObject.getComponent(Rigidbody.class).xVel = World.keyboard.getAxisX() * speed;
+        gameObject.getComponent(Rigidbody.class).yVel = World.keyboard.getAxisY() * speed;
 
         // stuff
         Rectangle windowRect = World.windows.get(0).panel.rect;
@@ -51,9 +47,5 @@ public class Player extends GameComponent {
         }
 
         return windownCount;
-    }
-
-    void collisionCheck(){
-
     }
 }
