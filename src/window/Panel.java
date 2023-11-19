@@ -61,6 +61,7 @@ public class Panel extends JPanel {
             } else {
                 GameObject isec = new GameObject(0, 0);
                 isec.addComponent(new Intersection(overlapRect, window));
+                intersections.add(isec);
             }
 
         }
@@ -89,13 +90,13 @@ public class Panel extends JPanel {
     }
 
     public void mouseClicked(MouseEvent e) {
-        /*
-        for (GameObject isec : intersections) {
+        for (GameObject gameObject : intersections) {
+            Intersection isec = gameObject.getComponent(Intersection.class);
+            if (isec == null) { continue; }
             if (isec.rect.relativeTo(rect).isPointInside(e.getPoint())) {
                 isec.onClick();
             }
         }
-        */
 
     }
 
