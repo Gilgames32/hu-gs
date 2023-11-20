@@ -32,8 +32,8 @@ public class World implements Runnable {
         player.addComponent(new Rigidbody());
         gameObjects.add(player);
         
-        GameObject box = new GameObject(300, 300);
-        box.addComponent(new Transform(100, 100));
+        GameObject box = new GameObject(0, 400);
+        box.addComponent(new Transform(400, 50, 0, 0));
         box.addComponent(new BoxCollider());
         box.addComponent(new Box());
         gameObjects.add(box);

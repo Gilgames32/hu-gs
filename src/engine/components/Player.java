@@ -1,12 +1,15 @@
 package engine.components;
 import java.awt.Color;
 
+import engine.listeners.CollisionListener;
 import game.World;
 import window.Window;
 import util.*;
 
-public class Player extends GameComponent {
+public class Player extends GameComponent implements CollisionListener {
     double speed = 5;
+    boolean canJump = true;
+
     Transform transform;
     BoxCollider collider;
     Rigidbody rigidbody;
@@ -17,6 +20,7 @@ public class Player extends GameComponent {
         transform = gameObject.getComponent(Transform.class);
         collider = gameObject.getComponent(BoxCollider.class);
         rigidbody = gameObject.getComponent(Rigidbody.class);
+        rigidbody.addCollisionListener(this);
         box = gameObject.getComponent(Box.class);
     }
 
@@ -26,8 +30,9 @@ public class Player extends GameComponent {
         inWindows();
         rigidbody.xVel = World.keyboard.getAxisX() * speed;
         // jump
-        if (World.keyboard.getSpace()) {
+        if (World.keyboard.getSpace() && canJump) {
             rigidbody.yVel = 10;
+            canJump = false;
         }
 
         // stuff
@@ -54,5 +59,10 @@ public class Player extends GameComponent {
         }
 
         return windownCount;
+    }
+
+    @Override
+    public void onLand() {
+        canJump = true;
     }
 }

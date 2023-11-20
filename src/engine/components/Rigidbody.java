@@ -1,7 +1,11 @@
 package engine.components;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import game.World;
 import engine.GameObject;
+import engine.listeners.CollisionListener;
 import util.Coord;
 import util.Rectangle;
 
@@ -11,6 +15,8 @@ public class Rigidbody extends GameComponent {
     double gravityScale = .5;
     Coord prevPos;
     BoxCollider selfCollider;
+
+    List<CollisionListener> listeners = new LinkedList<>();
 
     @Override
     public void start() {
@@ -121,10 +127,23 @@ public class Rigidbody extends GameComponent {
             // reset velocity when hit
             if (nextPos.y != gameObject.position.y) {
                 yVel = 0;
+                if (positiveY) {
+                    listenersNotifyOnLand();
+                }
             }
         }
 
         // store previous position
         prevPos = gameObject.position;
+    }
+
+    public void addCollisionListener(CollisionListener newListener) {
+        listeners.add(newListener);
+    }
+
+    void listenersNotifyOnLand() {
+        for (CollisionListener listener : listeners) {
+            listener.onLand();
+        }
     }
 }
