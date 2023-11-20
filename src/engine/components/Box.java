@@ -8,7 +8,7 @@ import util.Rectangle;
 
 public class Box extends GameComponent {
     public Color color = Color.BLACK;
-    Rectangle rect;
+    Transform transform = null;
 
     public Box() {}
 
@@ -18,17 +18,14 @@ public class Box extends GameComponent {
     
     @Override
     public void start() {
-        BoxCollider collider = gameObject.getComponent(BoxCollider.class);
-        if (collider != null) {
-            rect = collider.rect;
-        }
+        transform = gameObject.getComponent(Transform.class);
     }
 
     @Override
     public void draw(Graphics g, Coord offset) {
         g.setColor(color);
-        if (rect != null) {
-            Rectangle relativeRect = rect.toRelative(offset);
+        if (transform.rect != null) {
+            Rectangle relativeRect = transform.rect.addPos(offset);
             g.fillRect(relativeRect.getX1(), relativeRect.getY1(), relativeRect.getSizeX(), relativeRect.getSizeY());
         }
     }

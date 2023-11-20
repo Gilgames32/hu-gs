@@ -20,7 +20,7 @@ public class Intersection extends GameComponent {
     public void draw(Graphics g, Coord offset) {
         g.setColor(Color.CYAN);
         if (rect != null) {
-            Rectangle relativeRect = rect.toRelative(offset);
+            Rectangle relativeRect = rect.addPos(offset);
             g.fillRect(relativeRect.getX1(), relativeRect.getY1(), relativeRect.getSizeX(), relativeRect.getSizeY());
         }
     }

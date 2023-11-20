@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import engine.GameObject;
 import util.Rectangle;
+import game.World;
 
 public class Window {
     public JFrame frame = null;
@@ -54,7 +55,7 @@ public class Window {
         frame.setVisible(true);
 
         // initialize gameobject
-        gameObject = new GameObject(0, 0);
+        gameObject = new GameObject(0, 0, World.root);
     }
 
     void onWindowDrag() {

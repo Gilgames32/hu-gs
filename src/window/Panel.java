@@ -1,6 +1,7 @@
 package window;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -32,7 +33,9 @@ public class Panel extends JPanel {
 
     public void onWindowDrag(Window window) {
         World.keyboard.releaseAll();
-        rect.regenerate(getLocationOnScreen(), getSize());
+        Point onScreenLocation = getLocationOnScreen();
+        rect.regenerate(onScreenLocation, getSize());
+        window.gameObject.position = new Coord(onScreenLocation.x, onScreenLocation.y);
 
         // validate, generates the overlap rectangles shown
         validatePos(window);
@@ -59,7 +62,8 @@ public class Panel extends JPanel {
             if (overlapRect == null) {
                 continue;
             } else {
-                GameObject isec = new GameObject(0, 0);
+                // TODO: stinky code
+                GameObject isec = new GameObject(0, 0, null);
                 isec.addComponent(new Intersection(overlapRect, window));
                 intersections.add(isec);
             }
@@ -84,7 +88,7 @@ public class Panel extends JPanel {
 
         // children
         // loop thru stuff and use their draw
-        for (GameObject gameObject : World.gameObjects) {
+        for (GameObject gameObject : World.root.getAllChildren()) {
             gameObject.draw(g, rect.toCoord().multiply(-1));
         }
     }
@@ -93,7 +97,7 @@ public class Panel extends JPanel {
         for (GameObject gameObject : intersections) {
             Intersection isec = gameObject.getComponent(Intersection.class);
             if (isec == null) { continue; }
-            if (isec.rect.relativeTo(rect).isPointInside(e.getPoint())) {
+            if (isec.rect.subPos(rect).isPointInside(e.getPoint())) {
                 isec.onClick();
             }
         }

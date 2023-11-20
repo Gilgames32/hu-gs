@@ -52,7 +52,7 @@ public class Rigidbody extends GameComponent {
             }
 
             int closestXIntersection = nextPos.x + signedSizeXPer2;
-            for (GameObject other : World.gameObjects) {
+            for (GameObject other : World.root.getAllChildren()) {
                 BoxCollider collider = other.getComponent(BoxCollider.class);
                 // skipping non collidables
                 if (collider == null || collider.isTrigger || collider.gameObject == gameObject) {
@@ -98,7 +98,7 @@ public class Rigidbody extends GameComponent {
             }
 
             int closestYIntersection = nextPos.y + signedSizeYPer2;
-            for (GameObject other : World.gameObjects) {
+            for (GameObject other : World.root.getAllChildren()) {
                 BoxCollider collider = other.getComponent(BoxCollider.class);
                 // skipping non collidables
                 if (collider == null || collider.isTrigger || collider.gameObject == gameObject) {

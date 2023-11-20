@@ -95,20 +95,20 @@ public class Rectangle {
     }
 
     // subtract
-    public Rectangle relativeTo(Rectangle other) {
+    public Rectangle subPos(Rectangle other) {
         return new Rectangle(getX1() - other.getX1(), getY1() - other.getY1(), sizeX, sizeY);
     }
 
-    public Rectangle relativeTo(Coord other) {
+    public Rectangle subPos(Coord other) {
         return new Rectangle(getX1() - other.x, getY1() - other.y, sizeX, sizeY);
     }
 
     // add
-    public Rectangle toRelative(Rectangle other) {
+    public Rectangle addPos(Rectangle other) {
         return new Rectangle(getX1() + other.getX1(), getY1() + other.getY1(), sizeX, sizeY);
     }
 
-    public Rectangle toRelative(Coord other) {
+    public Rectangle addPos(Coord other) {
         return new Rectangle(getX1() + other.x, getY1() + other.y, sizeX, sizeY);
     }
 
