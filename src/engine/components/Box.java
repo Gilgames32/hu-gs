@@ -7,8 +7,14 @@ import util.Coord;
 import util.Rectangle;
 
 public class Box extends GameComponent {
-    public Color color = Color.black;
+    public Color color = Color.BLACK;
     Rectangle rect;
+
+    public Box() {}
+
+    public Box(Color c) {
+        color = c;
+    }
     
     @Override
     public void start() {

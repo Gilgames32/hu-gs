@@ -7,28 +7,35 @@ import util.*;
 
 public class Player extends GameComponent {
     double speed = 5;
+    Transform transform;
     BoxCollider collider;
-    Color color;
+    Rigidbody rigidbody;
+    Box box;
 
     @Override
     public void start() {
+        transform = gameObject.getComponent(Transform.class);
         collider = gameObject.getComponent(BoxCollider.class);
-        color = gameObject.getComponent(Box.class).color;
+        rigidbody = gameObject.getComponent(Rigidbody.class);
+        box = gameObject.getComponent(Box.class);
     }
 
 
     @Override
     public void update() {
         inWindows();
-        gameObject.getComponent(Rigidbody.class).xVel = World.keyboard.getAxisX() * speed;
-        gameObject.getComponent(Rigidbody.class).yVel = World.keyboard.getAxisY() * speed;
+        rigidbody.xVel = World.keyboard.getAxisX() * speed;
+        // jump
+        if (World.keyboard.getSpace()) {
+            rigidbody.yVel = 10;
+        }
 
         // stuff
         Rectangle windowRect = World.windows.get(0).panel.rect;
-        if (windowRect.isRectangleInside(collider.rect)) {
-            this.color = Color.RED;
+        if (windowRect.isRectangleInside(transform.getAbsoluteRectangle())) {
+            box.color = Color.RED;
         } else {
-            this.color = Color.BLUE;
+            box.color = Color.BLUE;
         }
     }
 

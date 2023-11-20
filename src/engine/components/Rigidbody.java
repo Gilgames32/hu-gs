@@ -8,7 +8,7 @@ import util.Rectangle;
 public class Rigidbody extends GameComponent {
     double xVel = 0;
     double yVel = 0;
-    double gravityScale = 1;
+    double gravityScale = .5;
     Coord prevPos;
     BoxCollider selfCollider;
 
@@ -24,13 +24,13 @@ public class Rigidbody extends GameComponent {
 
     @Override
     public void update() {
-        // yVel += gravityScale;
+        yVel -= gravityScale;
 
         // next position is keyboard inputs + velocity
         Coord nextPos = new Coord(gameObject.position.x, gameObject.position.y);
         // apply the velocity
         nextPos.x += xVel;
-        nextPos.y += yVel;
+        nextPos.y -= yVel;
 
         // x collision
         if (prevPos.x != nextPos.x) {

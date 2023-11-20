@@ -3,6 +3,7 @@ import java.awt.event.*;
 
 public class KeyHandler implements KeyListener {
     boolean w, a, s, d;
+    boolean space;
 
     public int getAxisX() {
         int axisx = 0;
@@ -23,9 +24,14 @@ public class KeyHandler implements KeyListener {
         return axisy;
     }
 
+    public boolean getSpace() {
+        return space;
+    }
+
     public void releaseAll() {
         // this line looks kinda cool
         w = a = s = d = false;
+        space = false;
     }
 
     public void keyTyped(KeyEvent event) {
@@ -50,6 +56,10 @@ public class KeyHandler implements KeyListener {
                 d = true;
                 break;
 
+            case KeyEvent.VK_SPACE:
+                space = true;
+                break;
+
             default:
                 break;
         }
@@ -71,6 +81,10 @@ public class KeyHandler implements KeyListener {
 
             case KeyEvent.VK_D:
                 d = false;
+                break;
+
+            case KeyEvent.VK_SPACE:
+                space = false;
                 break;
 
             default:

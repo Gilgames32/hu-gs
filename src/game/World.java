@@ -8,6 +8,7 @@ import engine.*;
 import engine.components.*;
 import util.*;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 public class World implements Runnable {
@@ -26,7 +27,7 @@ public class World implements Runnable {
         GameObject player = new GameObject(200, 200);
         player.addComponent(new Transform(50, 50));
         player.addComponent(new BoxCollider());
-        player.addComponent(new Box());
+        player.addComponent(new Box(Color.MAGENTA));
         player.addComponent(new Player());
         player.addComponent(new Rigidbody());
         gameObjects.add(player);
