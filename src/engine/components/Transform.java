@@ -1,6 +1,7 @@
 package engine.components;
 
 import util.Rectangle;
+import util.Coord;
 
 public class Transform extends GameComponent {
     Rectangle rect;
@@ -14,7 +15,8 @@ public class Transform extends GameComponent {
     }
 
     public Rectangle getAbsoluteRectangle() {
-        return new Rectangle(gameObject.position.x + rect.getX1(), gameObject.position.y + rect.getY1(), rect.getSizeX(), rect.getSizeY());
+        Coord absPos = gameObject.getAbsolutePosition().add(rect.toCoord());
+        return new Rectangle(absPos.x, absPos.y, rect.getSizeX(), rect.getSizeY());
     }
 
 }

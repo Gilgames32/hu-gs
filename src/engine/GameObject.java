@@ -26,7 +26,7 @@ public class GameObject {
     }
 
     public void draw(Graphics g, Coord offset) {
-                for (GameComponent component : components) {
+        for (GameComponent component : components) {
             component.draw(g, offset.add(position));
         }
 
@@ -78,7 +78,7 @@ public class GameObject {
     public Coord getAbsolutePosition(){
         // nyakkendő
         if (parent != null) {
-            return position.add(parent.position);
+            return position.add(parent.getAbsolutePosition());
         }
         else return position;
     }

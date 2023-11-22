@@ -3,7 +3,6 @@ import java.awt.Color;
 
 import engine.listeners.CollisionListener;
 import game.World;
-import window.Window;
 import util.*;
 
 public class Player extends GameComponent implements CollisionListener {
@@ -27,7 +26,8 @@ public class Player extends GameComponent implements CollisionListener {
 
     @Override
     public void update() {
-        inWindows();
+        // inWindows();
+        
         rigidbody.xVel = World.keyboard.getAxisX() * speed;
         // jump
         if (World.keyboard.getSpace() && canJump) {
@@ -42,23 +42,6 @@ public class Player extends GameComponent implements CollisionListener {
         } else {
             box.color = Color.BLUE;
         }
-    }
-
-    int inWindows() {
-        int windownCount = 0;
-        for (Window window : World.windows) {
-            if (collider.rect.overlap(window.panel.rect) != null) {
-                windownCount++;
-            }
-        }
-
-        for (Window window : World.windows) {
-            // this will set draggable true if its in less than two windows or the player is
-            // not in that window
-            window.draggable = collider.rect.overlap(window.panel.rect) == null || windownCount < 2;
-        }
-
-        return windownCount;
     }
 
     @Override

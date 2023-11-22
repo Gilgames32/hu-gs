@@ -82,7 +82,7 @@ public class Rectangle {
         return olrect;
     }
 
-    public void regenerate(Point upperRight, Dimension size) {
+    public void regenerate(Coord upperRight, Dimension size) {
         x = upperRight.x;
         y = upperRight.y;
         sizeX = size.width;
@@ -118,6 +118,10 @@ public class Rectangle {
 
     public boolean isPointInside(int x, int y) {
         return x > getX1() && x < getX2() && y > getY1() && y < getY2();
+    }
+
+    public boolean isCoordInside(Coord c) {
+        return c.x > getX1() && c.x < getX2() && c.y > getY1() && c.y < getY2();
     }
 
     public boolean isRectangleInside(Rectangle rect) {

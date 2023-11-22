@@ -15,6 +15,7 @@ public class World implements Runnable {
     static public ArrayList<Window> windows = new ArrayList<>();
     static public KeyHandler keyboard = new KeyHandler();
     static public MouseHandler mouse = new MouseHandler();
+
     static public GameObject root = new GameObject(0, 0, null);
 
     Thread gameThread;
@@ -24,14 +25,16 @@ public class World implements Runnable {
         // for now we use this for initialization
         windows.add(new Window("UwU", new Rectangle(100, 100, 400, 300)));
         windows.add(new Window("OwO", new Rectangle(100 + 400, 100, 400, 300)));
-        GameObject player = new GameObject(200, 200, root);
+        
+        GameObject player = new GameObject(300, 200, root);
         player.addComponent(new Transform(50, 50));
         player.addComponent(new BoxCollider());
         player.addComponent(new Box(Color.MAGENTA));
         player.addComponent(new Player());
         player.addComponent(new Rigidbody());
+        player.addComponent(new Entity());
         
-        GameObject box = new GameObject(0, 400, windows.get(0).gameObject);
+        GameObject box = new GameObject(100, 100, windows.get(0).panel.gameObject);
         box.addComponent(new Transform(400, 50, 0, 0));
         box.addComponent(new BoxCollider());
         box.addComponent(new Box());
@@ -43,7 +46,7 @@ public class World implements Runnable {
 
 
         // initalize gameobjects
-        for (GameObject gameObject : root.getAllChildren()) {
+        for (GameObject gameObject : root.children) {
             gameObject.start();
         }
 
@@ -80,9 +83,11 @@ public class World implements Runnable {
     public void update() {
         // update
         // update should follow the top down hierarchy
-        for (GameObject gameObject : root.getAllChildren()) {
+        for (GameObject gameObject : root.children) {
             gameObject.update();
         }
+
+        Window.validateWindows();
     }
 
     public void redraw() {

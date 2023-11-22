@@ -5,9 +5,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import engine.GameObject;
-import util.Rectangle;
+import engine.components.Entity;
 import game.World;
+import util.Rectangle;
 
 public class Window {
     public JFrame frame = null;
@@ -15,8 +15,6 @@ public class Window {
     public Panel panel = null;
     Point windowPos = null;
     public boolean draggable = true;
-
-    public GameObject gameObject = null;
 
     public Window(String title, Rectangle initRect) {
         frame = new JFrame(title);
@@ -54,8 +52,6 @@ public class Window {
         frame.pack();
         frame.setVisible(true);
 
-        // initialize gameobject
-        gameObject = new GameObject(0, 0, World.root);
     }
 
     void onWindowDrag() {
@@ -71,6 +67,17 @@ public class Window {
 
         }
 
+    }
+
+    public static void validateWindows() {
+        for (Window window : World.windows) {
+            window.draggable = true;
+            for (Entity entity : Entity.invalidEntities) {
+                if (entity.inWindows.contains(window)) {
+                    window.draggable = false;
+                }
+            }
+        }
     }
 
 }

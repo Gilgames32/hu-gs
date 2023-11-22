@@ -1,12 +1,12 @@
 package window;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import engine.GameObject;
+import engine.components.Entity;
 import engine.components.Intersection;
 import game.World;
 import util.*;
@@ -20,6 +20,8 @@ public class Panel extends JPanel {
     // storing where its currently overlapping
     ArrayList<GameObject> intersections = new ArrayList<>();
 
+    public GameObject gameObject = null;
+
     public Panel(Rectangle initRect) {
         rect = initRect;
 
@@ -29,13 +31,29 @@ public class Panel extends JPanel {
 
         addKeyListener(World.keyboard);
         addMouseListener(World.mouse);
+
+        // initialize gameobject
+        gameObject = new GameObject(0, 0, World.root);
     }
 
     public void onWindowDrag(Window window) {
         World.keyboard.releaseAll();
-        Point onScreenLocation = getLocationOnScreen();
-        rect.regenerate(onScreenLocation, getSize());
-        window.gameObject.position = new Coord(onScreenLocation.x, onScreenLocation.y);
+
+
+        Coord prevLocation = rect.toCoord(); 
+        Coord nextLocation = new Coord(getLocationOnScreen());
+
+        // move entities inside it
+        for (GameObject other : World.root.getAllChildren()) {
+            Entity entityComponent = other.getComponent(Entity.class);
+            if (entityComponent != null && entityComponent.lastValidPanel == gameObject) {
+                other.position = other.position.sub(prevLocation).add(nextLocation);
+            }
+        }
+
+        // move the window
+        rect.regenerate(nextLocation, getSize());
+        gameObject.position = nextLocation;
 
         // validate, generates the overlap rectangles shown
         validatePos(window);
@@ -81,15 +99,20 @@ public class Panel extends JPanel {
         // parent
         super.paintComponent(g);
 
-        // self
+        // intersections
         for (GameObject intersection : intersections) {
             intersection.draw(g, rect.toCoord().multiply(-1));
         }
 
-        // children
-        // loop thru stuff and use their draw
-        for (GameObject gameObject : World.root.getAllChildren()) {
-            gameObject.draw(g, rect.toCoord().multiply(-1));
+        // itself and children
+        for (GameObject child : World.root.children) {
+            if (gameObject == child) {
+                for (GameObject ownChild : gameObject.children) {
+                    ownChild.draw(g, new Coord(0, 0));
+                }
+            } else {
+                child.draw(g, rect.toCoord().multiply(-1));
+            }
         }
     }
 
