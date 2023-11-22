@@ -5,8 +5,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import engine.components.Entity;
-import game.World;
 import util.Rectangle;
 
 public class Window {
@@ -15,6 +13,9 @@ public class Window {
     public Panel panel = null;
     Point windowPos = null;
     public boolean draggable = true;
+
+    // adding a bit of a cooldown after every framedrag so the collision doesnt break :3
+    public static int frameCoolDown = 4;
 
     public Window(String title, Rectangle initRect) {
         frame = new JFrame(title);
@@ -64,20 +65,8 @@ public class Window {
             } else {
                 frame.setLocation(windowPos);
             }
-
         }
-
-    }
-
-    public static void validateWindows() {
-        for (Window window : World.windows) {
-            window.draggable = true;
-            for (Entity entity : Entity.invalidEntities) {
-                if (entity.inWindows.contains(window)) {
-                    window.draggable = false;
-                }
-            }
-        }
+        frameCoolDown = 4;
     }
 
 }

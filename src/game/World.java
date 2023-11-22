@@ -65,7 +65,11 @@ public class World implements Runnable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (isValidComposition()) {
+                validateWindows();
+
+                if (Window.frameCoolDown > 0) {
+                    Window.frameCoolDown--;
+                } else if (isValidComposition()) {
                     // update
                     update();
                 }
@@ -86,8 +90,6 @@ public class World implements Runnable {
         for (GameObject gameObject : root.children) {
             gameObject.update();
         }
-
-        Window.validateWindows();
     }
 
     public void redraw() {
@@ -113,5 +115,16 @@ public class World implements Runnable {
             }
         }
         return true;
+    }
+
+    public void validateWindows() {
+        for (Window window : World.windows) {
+            window.draggable = true;
+            for (Entity entity : Entity.invalidEntities) {
+                if (entity.inWindows.contains(window)) {
+                    window.draggable = false;
+                }
+            }
+        }
     }
 }
