@@ -6,10 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import engine.components.GameComponent;
+import engine.components.Transform;
 import util.*;
 
 public class GameObject {
     public Coord position = new Coord(0, 0);
+    public Transform transform = null;
     
     List<GameComponent> components = new ArrayList<>();
     

@@ -23,10 +23,11 @@ public class Box extends GameComponent {
 
     @Override
     public void draw(Graphics g, Coord offset) {
-        g.setColor(color);
-        if (transform.rect != null) {
-            Rectangle relativeRect = transform.rect.addPos(offset);
-            g.fillRect(relativeRect.getX1(), relativeRect.getY1(), relativeRect.getSizeX(), relativeRect.getSizeY());
+        if (transform == null || transform.rect == null) {
+            return;
         }
-    }
+        g.setColor(color);
+        Rectangle relativeRect = transform.rect.addPos(offset);
+        g.fillRect(relativeRect.getX1(), relativeRect.getY1(), relativeRect.getSizeX(), relativeRect.getSizeY());
+    }   
 }

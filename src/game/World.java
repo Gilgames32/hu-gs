@@ -127,4 +127,10 @@ public class World implements Runnable {
             }
         }
     }
+
+    public static void recalcSideBounds() {
+        for (Window window : windows) {
+            window.panel.recalcBounds();
+        }
+    }
 }

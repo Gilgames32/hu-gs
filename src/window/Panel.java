@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import engine.GameObject;
+import engine.components.Box;
+import engine.components.BoxCollider;
 import engine.components.Entity;
 import engine.components.Intersection;
+import engine.components.SideBound;
+import engine.components.Transform;
 import game.World;
 import util.*;
 
@@ -22,6 +26,9 @@ public class Panel extends JPanel {
 
     public GameObject gameObject = null;
 
+    // north, south, west, east
+    public SideBound[] bounds = new SideBound[4];
+
     public Panel(Rectangle initRect) {
         rect = initRect;
 
@@ -34,6 +41,9 @@ public class Panel extends JPanel {
 
         // initialize gameobject
         gameObject = new GameObject(0, 0, World.root);
+        
+        initializeBounds(initRect);
+
     }
 
     public void onWindowDrag(Window window) {
@@ -57,6 +67,9 @@ public class Panel extends JPanel {
 
         // validate, generates the overlap rectangles shown
         validatePos(window);
+
+        // recalc side bounds (every window)
+        World.recalcSideBounds();
     }
 
     public void validatePos(Window window) {
@@ -125,6 +138,35 @@ public class Panel extends JPanel {
             }
         }
 
+    }
+
+    public void initializeBounds(Rectangle initRect) {
+        // this is stupid bad code but runs
+        GameObject[] boundGameObjects = new GameObject[4];
+        for (int i = 0; i < boundGameObjects.length; i++) {
+            boundGameObjects[i] = new GameObject(0, 0, gameObject);
+        }
+
+        int treshold = 10;
+        boundGameObjects[0].addComponent(new Transform(initRect.getSizeX(), treshold, 0, -treshold));
+        boundGameObjects[1].addComponent(new Transform(initRect.getSizeX(), treshold, 0, initRect.getSizeY()));
+        boundGameObjects[2].addComponent(new Transform(treshold, initRect.getSizeY(), -treshold, 0));
+        boundGameObjects[3].addComponent(new Transform(treshold, initRect.getSizeY(), initRect.getSizeX(), 0));
+
+        for (GameObject bound : boundGameObjects) {
+            bound.addComponent(new Box());
+            bound.addComponent(new BoxCollider());
+            bound.addComponent(new SideBound());
+        }
+        for (int i = 0; i < boundGameObjects.length; i++) {
+            bounds[i] = boundGameObjects[i].getComponent(SideBound.class);
+        }
+    }
+
+    public void recalcBounds() {
+        for (SideBound side : bounds) {
+            side.recalc();
+        }
     }
 
 }

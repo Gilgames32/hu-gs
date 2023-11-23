@@ -15,7 +15,7 @@ public class Window {
     public boolean draggable = true;
 
     // adding a bit of a cooldown after every framedrag so the collision doesnt break :3
-    public static int frameCoolDown = 4;
+    public static int frameCoolDown = 30;
 
     public Window(String title, Rectangle initRect) {
         frame = new JFrame(title);

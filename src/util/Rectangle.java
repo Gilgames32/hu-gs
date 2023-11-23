@@ -22,6 +22,13 @@ public class Rectangle {
         sizeY = size.height;
     }
 
+    public Rectangle(Rectangle r) {
+        x = r.x;
+        y = r.y;
+        sizeX = r.sizeX;
+        sizeY = r.sizeY;
+    }
+
     public int getX1() {
         return x;
     }
