@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.LinkedList;
 
 import engine.GameObject;
-import game.World;
+import scene.World;
 import util.Rectangle;
 import window.Window;
 

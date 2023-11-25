@@ -10,7 +10,7 @@ import engine.components.Entity;
 import engine.components.Intersection;
 import engine.components.SideBound;
 import engine.components.Transform;
-import game.World;
+import scene.World;
 import util.*;
 
 public class Panel extends JPanel {

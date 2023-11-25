@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.util.List;
 
 import engine.GameObject;
+import scene.World;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import game.World;
 import util.Rectangle;
 import window.Window;
 

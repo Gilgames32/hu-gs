@@ -1,7 +1,7 @@
 package window;
 import java.awt.event.*;
 
-import game.World;
+import scene.World;
 
 public class MouseHandler implements MouseListener {
     public void mousePressed(MouseEvent e) {

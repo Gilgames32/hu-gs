@@ -3,9 +3,9 @@ package engine.components;
 import java.util.LinkedList;
 import java.util.List;
 
-import game.World;
 import engine.GameObject;
 import engine.listeners.CollisionListener;
+import scene.World;
 import util.Coord;
 import util.Rectangle;
 

@@ -2,7 +2,7 @@ package engine.components;
 import java.awt.Color;
 
 import engine.listeners.CollisionListener;
-import game.World;
+import scene.World;
 import util.*;
 
 public class Player extends GameComponent implements CollisionListener {
