@@ -15,16 +15,87 @@ import util.Rectangle;
 import window.Window;
 
 public class SideBound extends GameComponent {
-    BoxCollider boxCollider;
+    public enum WindowSide {
+        north, south, west, east
+    }
 
     public boolean vertical;
 
+    public WindowSide side;
+    public boolean solid = false;
+
+    private Rectangle defaultRect;
+    private static final int treshold = 10;
+
+    public SideBound(Rectangle windowRect, WindowSide windowSide) {
+        side = windowSide;
+        switch (windowSide) {
+            case north:
+                defaultRect = new Rectangle(0, -treshold, windowRect.getSizeX(), treshold);
+                break;
+
+            case south:
+                defaultRect = new Rectangle(0, windowRect.getSizeY(), windowRect.getSizeX(), treshold);
+                break;
+
+            case west:
+                defaultRect = new Rectangle(-treshold, 0, treshold, windowRect.getSizeY());
+                break;
+
+            case east:
+                defaultRect = new Rectangle(windowRect.getSizeX(), 0, treshold, windowRect.getSizeY());
+                break;
+
+            default:
+                break;
+        }
+
+        vertical = windowSide == WindowSide.east ||windowSide == WindowSide.west;
+    }
+
     @Override
     public void start() {
-        boxCollider = gameObject.getComponent(BoxCollider.class);
+        gameObject.transform.rect = defaultRect;
+    }
+
+    public void freeze() {
+        solid = true;
+        switch (side) {
+            case north:
+                defaultRect.setY1(defaultRect.getY1() + treshold);
+                break;
+
+            case south:
+                defaultRect.setY1(defaultRect.getY1() - treshold);
+                break;
+
+            case west:
+                defaultRect.setX1(defaultRect.getX1() + treshold);
+                break;
+
+            case east:
+                defaultRect.setX1(defaultRect.getX1() - treshold);
+                break;
+
+            default:
+                break;
+        }
+        gameObject.transform.rect = defaultRect;
+        makeChild(0, vertical ? defaultRect.getSizeY() : defaultRect.getSizeX());
+        Box box = gameObject.getComponent(Box.class);
+        if (box != null) {
+            box.color = Color.BLACK;
+        }
+        else {
+            gameObject.addComponent(new Box(Color.BLACK));
+        }
     }
 
     public void recalc() {
+        if (solid) {
+            return;
+        }
+
         List<Rectangle> overlapList = new ArrayList<>();
 
         for (Window window : World.windows) {
@@ -54,7 +125,6 @@ public class SideBound extends GameComponent {
         // kövi
         // hacsak nem mennénk size fölé
         Iterator<Rectangle> iter = overlapList.iterator();
-
 
         int i1 = 0;
         int i2 = 0;
@@ -118,8 +188,6 @@ public class SideBound extends GameComponent {
             }
             collider.addComponent(new Transform(rect.addPos(gameObject.transform.rect)));
             collider.addComponent(new BoxCollider());
-            collider.addComponent(new Box());
-            collider.getComponent(Box.class).color = Color.GREEN;
             collider.start();
         }
     }

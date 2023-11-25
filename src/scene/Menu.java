@@ -30,6 +30,7 @@ public class Menu extends JFrame {
         // window
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("HU-GS");
+        setIconImage(new ImageIcon("./assets/icon.png").getImage());
         setPreferredSize(new Dimension(400, 300));
         setLayout(new BorderLayout());
 

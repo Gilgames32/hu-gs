@@ -3,6 +3,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JPanel;
 
 import engine.GameObject;
@@ -10,6 +13,7 @@ import engine.components.Entity;
 import engine.components.Intersection;
 import engine.components.SideBound;
 import engine.components.Transform;
+import engine.components.SideBound.WindowSide;
 import scene.World;
 import util.*;
 
@@ -25,7 +29,7 @@ public class Panel extends JPanel {
     public GameObject gameObject = null;
 
     // north, south, west, east
-    public SideBound[] bounds = new SideBound[4];
+    public Map<WindowSide, SideBound> bounds = new HashMap<>();
 
     public Panel(Rectangle initRect) {
         rect = initRect;
@@ -139,31 +143,16 @@ public class Panel extends JPanel {
     }
 
     public void initializeBounds(Rectangle initRect) {
-        // this is stupid bad code but runs
-        GameObject[] boundGameObjects = new GameObject[4];
-        for (int i = 0; i < boundGameObjects.length; i++) {
-            boundGameObjects[i] = new GameObject(0, 0, gameObject);
-        }
-
-        int treshold = 10;
-        boundGameObjects[0].addComponent(new Transform(initRect.getSizeX(), treshold, 0, -treshold));
-        boundGameObjects[1].addComponent(new Transform(initRect.getSizeX(), treshold, 0, initRect.getSizeY()));
-        boundGameObjects[2].addComponent(new Transform(treshold, initRect.getSizeY(), -treshold, 0));
-        boundGameObjects[3].addComponent(new Transform(treshold, initRect.getSizeY(), initRect.getSizeX(), 0));
-
-        for (GameObject bound : boundGameObjects) {
-            // bound.addComponent(new Box());
-            // bound.addComponent(new BoxCollider());
-            bound.addComponent(new SideBound());
-        }
-        for (int i = 0; i < boundGameObjects.length; i++) {
-            bounds[i] = boundGameObjects[i].getComponent(SideBound.class);
-            bounds[i].vertical = i >= 2;
+        for (WindowSide side : WindowSide.values()) {
+            GameObject boundGameObject = new GameObject(0, 0, gameObject);
+            boundGameObject.addComponent(new Transform(0, 0));
+            boundGameObject.addComponent(new SideBound(this.rect, side));
+            bounds.put(side, boundGameObject.getComponent(SideBound.class));
         }
     }
 
     public void recalcBounds() {
-        for (SideBound side : bounds) {
+        for (SideBound side : bounds.values()) {
             side.recalc();
         }
     }

@@ -1,6 +1,7 @@
 package scene.levels;
 import engine.GameObject;
 import engine.components.*;
+import engine.components.SideBound.WindowSide;
 import scene.World;
 import util.Rectangle;
 import window.Window;
@@ -30,6 +31,8 @@ public class Level2 extends World {
         box.addComponent(new Transform(400, 50, 0, 0));
         box.addComponent(new BoxCollider());
         box.addComponent(new Box());
+
+        windows.get(0).panel.bounds.get(WindowSide.east).freeze();
         
         super.start();
     }
