@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import engine.GameObject;
-import engine.components.Box;
-import engine.components.BoxCollider;
 import engine.components.Entity;
 import engine.components.Intersection;
 import engine.components.SideBound;
@@ -154,12 +152,13 @@ public class Panel extends JPanel {
         boundGameObjects[3].addComponent(new Transform(treshold, initRect.getSizeY(), initRect.getSizeX(), 0));
 
         for (GameObject bound : boundGameObjects) {
-            bound.addComponent(new Box());
-            bound.addComponent(new BoxCollider());
+            // bound.addComponent(new Box());
+            // bound.addComponent(new BoxCollider());
             bound.addComponent(new SideBound());
         }
         for (int i = 0; i < boundGameObjects.length; i++) {
             bounds[i] = boundGameObjects[i].getComponent(SideBound.class);
+            bounds[i].vertical = i >= 2;
         }
     }
 

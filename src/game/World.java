@@ -25,6 +25,7 @@ public class World implements Runnable {
         // for now we use this for initialization
         windows.add(new Window("UwU", new Rectangle(100, 100, 400, 300)));
         windows.add(new Window("OwO", new Rectangle(100 + 400, 100, 400, 300)));
+        windows.add(new Window(">w<", new Rectangle(100, 100 + 300, 200, 150)));
         
         GameObject player = new GameObject(300, 200, root);
         player.addComponent(new Transform(50, 50));

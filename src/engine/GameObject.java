@@ -99,4 +99,21 @@ public class GameObject {
         return allChildren;
     }
 
+    public void destroy() {
+        for (GameObject child : children) {
+            child.destroy();
+        }
+        children.clear();
+        parent.children.remove(this);
+        parent = null;
+    }
+
+    public void destroyAllChildren() {
+        for (GameObject child : children) {
+            child.destroyAllChildren();
+            child.parent = null;
+        }
+        children.clear();
+    }
+
 }
