@@ -35,27 +35,23 @@ public class Menu extends JFrame {
 
         // title
         title = new JLabel("HU-GS", SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 36));
+        title.setFont(new Font("VCR OSD Mono", Font.BOLD, 72));
         add(title, BorderLayout.NORTH);
 
         // panel
-        JPanel panel = new MenuPanel();
-
-        // sprite
-        ImageIcon backGround = new ImageIcon("assets/nekoarc_zamn.png");
-        panel.add(new JLabel(backGround));
+        JPanel menuPanel = new JPanel();
 
         // button
         button = new JButton("LOAD GAME");
         button.addActionListener(new MenuButtonListener());
-        panel.add(button);
+        menuPanel.add(button);
 
         // combobox
         comboBox = new JComboBox<>(levels.toArray(new World[0]));
-        panel.add(comboBox, BorderLayout.EAST);
+        menuPanel.add(comboBox, BorderLayout.EAST);
 
         // finalize
-        add(panel, BorderLayout.CENTER);
+        add(menuPanel, BorderLayout.CENTER);
         pack();
 
         // center
