@@ -1,46 +1,40 @@
 package engine.components;
-import java.awt.Color;
 
 import engine.listeners.CollisionListener;
 import scene.World;
-import util.*;
 
 public class Player extends GameComponent implements CollisionListener {
     double speed = 5;
     boolean canJump = true;
 
-    Transform transform;
-    BoxCollider collider;
+
     Rigidbody rigidbody;
-    Box box;
+    Sprite sprite;
 
     @Override
     public void start() {
-        transform = gameObject.getComponent(Transform.class);
-        collider = gameObject.getComponent(BoxCollider.class);
         rigidbody = gameObject.getComponent(Rigidbody.class);
         rigidbody.addCollisionListener(this);
-        box = gameObject.getComponent(Box.class);
+        sprite = gameObject.getComponent(Sprite.class);
+        
     }
 
 
     @Override
     public void update() {
-        // inWindows();
-        
-        rigidbody.xVel = World.keyboard.getAxisX() * speed;
+        int kbx = World.keyboard.getAxisX();
+        rigidbody.xVel = kbx * speed;
         // jump
         if (World.keyboard.getSpace() && canJump) {
             rigidbody.yVel = 10;
             canJump = false;
         }
 
-        // stuff
-        Rectangle windowRect = World.windows.get(0).panel.rect;
-        if (windowRect.isRectangleInside(transform.getAbsoluteRectangle())) {
-            box.color = Color.RED;
-        } else {
-            box.color = Color.BLUE;
+        if (kbx > 0) {
+            sprite.flip = false;
+        }
+        else if (kbx < 0) {
+            sprite.flip = true;
         }
     }
 

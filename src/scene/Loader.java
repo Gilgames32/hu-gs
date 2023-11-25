@@ -36,8 +36,8 @@ public class Loader {
         levelCompletion = new HashMap<>();
         List<Class<? extends World>> levels = new ArrayList<>();
         // build levellist
+        levels.add(DebugLevel.class);
         levels.add(Level1.class);
-        levels.add(Level2.class);
 
         for (Class<? extends World> level : levels) {
             levelCompletion.put(level, false);

@@ -2,6 +2,7 @@ package engine.components;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.image.ImageObserver;
 
 import util.Coord;
 import util.Rectangle;
@@ -17,7 +18,7 @@ public class Intersection extends GameComponent {
     }
 
     @Override
-    public void draw(Graphics g, Coord offset) {
+    public void draw(Graphics g, Coord offset, ImageObserver imgObs) {
         g.setColor(Color.CYAN);
         if (rect != null) {
             Rectangle relativeRect = rect.addPos(offset);

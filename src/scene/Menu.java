@@ -16,12 +16,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import window.Window;
+
 public class Menu extends JFrame {
     private JButton button;
     private JLabel title;
     private JComboBox<World> comboBox;
 
     List<World> levels = new ArrayList<>();
+    int lastLevel = 0;
 
     public Menu() {
         // load
@@ -62,12 +65,7 @@ public class Menu extends JFrame {
     private class MenuButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("LOAD");
-            
-            World mainGame = (World)comboBox.getSelectedItem();
-            mainGame.start();
-
-            setVisible(false);
+            startLevel(comboBox.getSelectedIndex());
         }
     }
 
@@ -81,5 +79,23 @@ public class Menu extends JFrame {
             }
 
         }
+    }
+
+    public void startLevel(int index) {
+        lastLevel = index;
+        levels.get(index).start();
+        setVisible(false);
+    }
+
+    public void onLevelComplete() {
+        for (Window window : World.windows) {
+            window.frame.setVisible(false);
+        }
+        World.reset();
+
+        Loader.levelCompletion.replace(levels.get(lastLevel).getClass(), true);
+        Loader.saveLevels();
+
+        setVisible(true);
     }
 }

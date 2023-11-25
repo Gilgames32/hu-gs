@@ -9,6 +9,8 @@ import scene.World;
 import util.Coord;
 import util.Rectangle;
 
+
+// note: for some reason the collision dies if the size is an odd integer
 public class Rigidbody extends GameComponent {
     double xVel = 0;
     double yVel = 0;

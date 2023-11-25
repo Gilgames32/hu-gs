@@ -1,6 +1,7 @@
 package engine;
 
 import java.awt.Graphics;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,14 +28,14 @@ public class GameObject {
         }
     }
 
-    public void draw(Graphics g, Coord offset) {
+    public void draw(Graphics g, Coord offset, ImageObserver imgObs) {
         for (GameComponent component : components) {
-            component.draw(g, offset.add(position));
+            component.draw(g, offset.add(position), imgObs);
         }
 
         // draw children
         for (GameObject gameObject : children) {
-            gameObject.draw(g, offset.add(position));
+            gameObject.draw(g, offset.add(position), imgObs);
         }
     }
 

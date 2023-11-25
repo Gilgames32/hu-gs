@@ -13,12 +13,19 @@ public class World implements Runnable {
     static public ArrayList<Window> windows = new ArrayList<>();
     static public KeyHandler keyboard = new KeyHandler();
     static public MouseHandler mouse = new MouseHandler();
-
     static public GameObject root = new GameObject(0, 0, null);
 
-    Thread gameThread;
-
+    private static Thread gameThread;
+    private static Timer gameTimer;
     public String name = "Hello World!";
+
+    public static void reset() {
+        gameTimer.cancel();
+        windows = new ArrayList<>();
+        keyboard = new KeyHandler();
+        mouse = new MouseHandler();
+        root = new GameObject(0, 0, null);
+    }
 
     public void start() {
         // start stuff here idk
@@ -41,8 +48,8 @@ public class World implements Runnable {
         // deltaTime in miliseconds
         long deltaTime = Math.round(1000 / FPS);
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+        gameTimer = new Timer();
+        gameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 validateWindows();

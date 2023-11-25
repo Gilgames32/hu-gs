@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import util.Coord;
 import util.Rectangle;
+import java.awt.image.ImageObserver;
 
 public class Box extends GameComponent {
     public Color color = Color.BLACK;
@@ -22,7 +23,7 @@ public class Box extends GameComponent {
     }
 
     @Override
-    public void draw(Graphics g, Coord offset) {
+    public void draw(Graphics g, Coord offset, ImageObserver imgObs) {
         if (transform == null || transform.rect == null) {
             return;
         }

@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import engine.GameObject;
 import util.Coord;
 
+import java.awt.image.ImageObserver;
+
 public class GameComponent {
     GameObject gameObject;
     
@@ -12,7 +14,7 @@ public class GameComponent {
         gameObject = parent;
     }
 
-    public void draw(Graphics g, Coord offset) {
+    public void draw(Graphics g, Coord offset, ImageObserver imgObs) {
 
     }
     public void start() {
