@@ -84,10 +84,10 @@ public class SideBound extends GameComponent {
         makeChild(0, vertical ? defaultRect.getSizeY() : defaultRect.getSizeX());
         Box box = gameObject.getComponent(Box.class);
         if (box != null) {
-            box.color = Color.BLACK;
+            box.color = Color.GRAY;
         }
         else {
-            gameObject.addComponent(new Box(Color.BLACK));
+            gameObject.addComponent(new Box(Color.GRAY));
         }
     }
 

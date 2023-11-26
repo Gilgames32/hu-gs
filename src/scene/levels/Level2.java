@@ -15,8 +15,6 @@ public class Level2 extends World {
     public void start() {
         Window w1 = new Window("cheffs kiss", new Rectangle(-400, 0, 400, 300));
         Window w2 = new Window("do they really?", new Rectangle(400, 0, 400, 300));
-        windows.add(w1);
-        windows.add(w2);
 
         Prefabs.imagePrefab(225, -100, "./assets/l2_bg.png", w1.panel.gameObject);
 

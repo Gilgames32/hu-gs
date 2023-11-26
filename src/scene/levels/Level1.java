@@ -17,7 +17,6 @@ public class Level1 extends World {
 
         Window mainWindow = new Window("WASD SPACE", new Rectangle(0, 0, 400, 300));
         GameObject main = mainWindow.panel.gameObject;
-        windows.add(mainWindow);
 
         bg.position = bg.position.add(mainWindow.panel.rect.toCoord());
 

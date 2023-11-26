@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import scene.App;
+import scene.World;
 import util.Rectangle;
 
 public class Window {
@@ -61,6 +62,7 @@ public class Window {
         frame.pack();
         frame.setVisible(true);
 
+        World.windows.add(this);
     }
 
     void onWindowDrag() {
