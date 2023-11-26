@@ -1,7 +1,6 @@
 package scene.levels;
 import engine.GameObject;
 import engine.components.*;
-import engine.components.SideBound.WindowSide;
 import scene.Prefabs;
 import scene.World;
 import util.Rectangle;

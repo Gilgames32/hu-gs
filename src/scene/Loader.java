@@ -1,7 +1,5 @@
 package scene;
 
-import java.util.Map;
-
 import scene.levels.*;
 
 import java.io.File;
@@ -10,17 +8,16 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Loader {
-    public static Map<Class<? extends World>, Boolean> levelCompletion = null;
+    public static List<LevelSaveEntry> levelCompletion = null;
     public static final String fileName = "saves.dat";
 
     public static void saveLevels() {
+        System.out.println("Save");
         File savesFile = new File(fileName);
         if (!savesFile.exists()) {
-            System.out.println("gex");
             resetLevels();
         }
         try {
@@ -30,44 +27,41 @@ public class Loader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        print();
     }
 
     public static void resetLevels() {
-        levelCompletion = new HashMap<>();
-        List<Class<? extends World>> levels = new ArrayList<>();
-        // build levellist
-        levels.add(DebugLevel.class);
-        levels.add(Level1.class);
+        levelCompletion = new ArrayList<>();
+        // build list
+        levelCompletion.add(new LevelSaveEntry(DebugLevel.class, true, false));
+        levelCompletion.add(new LevelSaveEntry(Level1.class, true, false));
+        levelCompletion.add(new LevelSaveEntry(Level2.class, false, false));
 
-        for (Class<? extends World> level : levels) {
-            levelCompletion.put(level, false);
-        }
-        levelCompletion.replace(levels.get(0), true);
+        System.out.println("Levels reset");
     }
 
     @SuppressWarnings("unchecked")
     public static void loadLevels() {
+        System.out.println("Load");
         File savesFile = new File(fileName);
         if (!savesFile.exists()) {
-            System.out.println("say");
-            resetLevels();
-            return;
+            saveLevels();
         }
 
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-            levelCompletion = (Map<Class<? extends World>, Boolean>) ois.readObject();
+            levelCompletion = (List<LevelSaveEntry>) ois.readObject();
             ois.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        print();
     }
 
-    public static List<Class<? extends World>> getLevelArray() {
-        if (levelCompletion == null) {
-            loadLevels();
+    private static void print() {
+        for (LevelSaveEntry levelSaveEntry : levelCompletion) {
+            System.out.println(levelSaveEntry);
         }
-
-        return new ArrayList<>(levelCompletion.keySet());
     }
 }

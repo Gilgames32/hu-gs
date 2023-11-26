@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.DefaultComboBoxModel;
 
 import window.Window;
 
@@ -22,20 +24,19 @@ public class Menu extends JFrame {
     private JButton button;
     private JLabel title;
     private JComboBox<World> comboBox;
+    private DefaultComboBoxModel<World> comboBoxModel;
 
     List<World> levels = new ArrayList<>();
     int lastLevel = 0;
 
     public Menu() {
-        // load
-        loadAndGenerateLevels();
-
         // window
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("HU-GS");
         setIconImage(new ImageIcon("./assets/icon.png").getImage());
         setPreferredSize(new Dimension(400, 300));
         setLayout(new BorderLayout());
+        setResizable(false);
 
         // title
         title = new JLabel("HU-GS", SwingConstants.CENTER);
@@ -51,8 +52,17 @@ public class Menu extends JFrame {
         menuPanel.add(button);
 
         // combobox
-        comboBox = new JComboBox<>(levels.toArray(new World[0]));
+        comboBoxModel = new DefaultComboBoxModel<>(levels.toArray(new World[0]));
+        comboBox = new JComboBox<>(comboBoxModel);
         menuPanel.add(comboBox, BorderLayout.EAST);
+
+        // image
+        ImageIcon img = new ImageIcon("assets/icon.png");
+        ImageIcon upscaledImg = new ImageIcon(img.getImage().getScaledInstance(img.getIconWidth() * 4, img.getIconHeight() * 4, Image.SCALE_SMOOTH));
+        JLabel imgLabel = new JLabel(upscaledImg);
+        // extra margin
+        imgLabel.setPreferredSize(new Dimension(img.getIconWidth() * 5, img.getIconHeight() * 5));
+        add(imgLabel, BorderLayout.SOUTH);
 
         // finalize
         add(menuPanel, BorderLayout.CENTER);
@@ -60,6 +70,9 @@ public class Menu extends JFrame {
 
         // center
         setLocationRelativeTo(null);
+
+        // load
+        loadAndGenerateLevels();
     }
 
     private class MenuButtonListener implements ActionListener {
@@ -71,18 +84,30 @@ public class Menu extends JFrame {
 
     private void loadAndGenerateLevels() {
         Loader.loadLevels();
-        for (Class<? extends World> levelClass : Loader.getLevelArray()) {
+
+        levels = new ArrayList<>();
+
+        for (LevelSaveEntry levelEntry : Loader.levelCompletion) {
             try {
-                levels.add(levelClass.getDeclaredConstructor().newInstance());
+                if (levelEntry.isPlayable) {
+                    levels.add(levelEntry.levelClass.getDeclaredConstructor().newInstance());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
+
+        comboBoxModel.removeAllElements();
+        comboBoxModel.addAll(levels);
+        comboBox.setSelectedIndex(lastLevel);
+
     }
 
     public void startLevel(int index) {
         lastLevel = index;
+        if (index < 0) {
+            return;
+        }
         levels.get(index).start();
         setVisible(false);
     }
@@ -93,9 +118,11 @@ public class Menu extends JFrame {
         }
         World.reset();
 
-        Loader.levelCompletion.replace(levels.get(lastLevel).getClass(), true);
+        Loader.levelCompletion.get(lastLevel).isCompleted = true;
+        Loader.levelCompletion.get(lastLevel + 1).isPlayable = true;
         Loader.saveLevels();
 
+        loadAndGenerateLevels();
         setVisible(true);
     }
 }
