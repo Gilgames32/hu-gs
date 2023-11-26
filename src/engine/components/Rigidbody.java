@@ -62,6 +62,7 @@ public class Rigidbody extends GameComponent {
             }
 
             int closestXIntersection = nextPos.x + signedSizeXPer2;
+            GameObject collidedWith = null;
             for (GameObject other : World.root.getAllChildren()) {
                 BoxCollider collider = other.getComponent(BoxCollider.class);
                 // skipping non collidables
@@ -77,11 +78,13 @@ public class Rigidbody extends GameComponent {
                         // min
                         if (overlapRect.getX1() < closestXIntersection) {
                             closestXIntersection = overlapRect.getX1();
+                            collidedWith = other;
                         }
                     } else {
                         // max
                         if (overlapRect.getX2() > closestXIntersection) {
                             closestXIntersection = overlapRect.getX2();
+                            collidedWith = other;
                         }
                     }
                 }
@@ -90,6 +93,8 @@ public class Rigidbody extends GameComponent {
             gameObject.position.x = closestXIntersection - signedSizeXPer2;
             // reset velocity when hit
             if (nextPos.x != gameObject.position.x) {
+                listenersNotifyOnCollision(collidedWith);
+                collidedWith.getComponent(BoxCollider.class).onCollision(gameObject);
                 xVel = 0;
             }
         }
@@ -108,6 +113,7 @@ public class Rigidbody extends GameComponent {
             }
 
             int closestYIntersection = nextPos.y + signedSizeYPer2;
+            GameObject collidedWith = null;
             for (GameObject other : World.root.getAllChildren()) {
                 BoxCollider collider = other.getComponent(BoxCollider.class);
                 // skipping non collidables
@@ -123,11 +129,13 @@ public class Rigidbody extends GameComponent {
                         // min
                         if (overlapRect.getY1() < closestYIntersection) {
                             closestYIntersection = overlapRect.getY1();
+                            collidedWith = other;
                         }
                     } else {
                         // max
                         if (overlapRect.getY2() > closestYIntersection) {
                             closestYIntersection = overlapRect.getY2();
+                            collidedWith = other;
                         }
                     }
                 }
@@ -136,9 +144,15 @@ public class Rigidbody extends GameComponent {
             gameObject.position.y = closestYIntersection - signedSizeYPer2;
             // reset velocity when hit
             if (nextPos.y != gameObject.position.y) {
-                yVel = 0;
+                // ghetto fix for trampolines
+                double prevYVel = yVel;
                 if (positiveY) {
                     listenersNotifyOnLand();
+                }
+                listenersNotifyOnCollision(collidedWith);
+                collidedWith.getComponent(BoxCollider.class).onCollision(gameObject);
+                if (yVel == prevYVel) {
+                    yVel = 0;
                 }
             }
         }
@@ -162,6 +176,12 @@ public class Rigidbody extends GameComponent {
     void listenersNotifyOnLand() {
         for (CollisionListener listener : listeners) {
             listener.onLand();
+        }
+    }
+
+    void listenersNotifyOnCollision(GameObject other) {
+        for (CollisionListener listener : listeners) {
+            listener.onCollision(other);
         }
     }
 }

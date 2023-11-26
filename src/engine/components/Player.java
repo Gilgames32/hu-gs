@@ -1,5 +1,6 @@
 package engine.components;
 
+import engine.GameObject;
 import engine.listeners.CollisionListener;
 import scene.World;
 
@@ -43,5 +44,10 @@ public class Player extends GameComponent implements CollisionListener {
     @Override
     public void onLand() {
         canJump = true;
+    }
+
+    @Override
+    public void onCollision(GameObject other) {
+        // pass
     }
 }

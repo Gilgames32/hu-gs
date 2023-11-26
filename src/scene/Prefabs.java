@@ -51,4 +51,12 @@ public class Prefabs {
         platform.addComponent(new Sprite(img));
         return platform;
     }
+
+    public static GameObject trampolinePrefab(int x, int y, int sizex, int sizey, GameObject parent) {
+        GameObject platform = new GameObject(x, y, parent);
+        platform.addComponent(new Transform(sizex, sizey, 0, 0));
+        platform.addComponent(new Trampoline());
+        platform.addComponent(new Sprite("./assets/trampoline.png"));
+        return platform;
+    }
 }

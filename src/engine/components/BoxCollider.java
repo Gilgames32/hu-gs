@@ -44,4 +44,7 @@ public class BoxCollider extends GameComponent {
      */
     public void onTrigger(GameObject other) {
     }
+
+    public void onCollision(GameObject other) {
+    }
 }
