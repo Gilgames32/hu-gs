@@ -18,7 +18,7 @@ public class Level4 extends World {
 
     @Override
     public void start() {
-        Window w1 = new Window("when", new Rectangle(-100, 0, 400, 300));
+        Window w1 = new Window(">w<", new Rectangle(-100, 0, 400, 300));
 
         GameObject player = Prefabs.playerPrefab(100, 200, root);
         player.position = player.position.add(w1.panel.rect.toCoord());
@@ -33,12 +33,12 @@ public class Level4 extends World {
 
         Prefabs.cakePrefab(300, 250, w1.panel.gameObject);
 
-        Window w2 = new Window("the", new Rectangle(300, -100, 200, 150));
+        Window w2 = new Window("UwU", new Rectangle(300, 100, 200, 150));
         w2.panel.bounds.get(WindowSide.north).freeze();
         w2.panel.bounds.get(WindowSide.west).freeze();
         w2.panel.bounds.get(WindowSide.east).freeze();
 
-        Window w3 = new Window("is", new Rectangle(300, 100, 200, 150));
+        Window w3 = new Window("OwO", new Rectangle(300, -100, 200, 150));
         w3.panel.bounds.get(WindowSide.south).freeze();
         wall = new GameObject(100, 75, w3.panel.gameObject);
         wall.addComponent(new Transform(10, 150));
