@@ -91,8 +91,19 @@ public class Panel extends JPanel {
         }
     }
 
-    public boolean isOverlapping() {
-        return intersections.isEmpty();
+    public boolean isOverlapping(Window window) {
+        for (Window otherWindow : World.windows) {
+            // dont compare to self
+            if (otherWindow == window) {
+                continue;
+            }
+            // overlapping rectangle
+            Rectangle overlapRect = rect.overlap(otherWindow.panel.rect);
+            if (overlapRect != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

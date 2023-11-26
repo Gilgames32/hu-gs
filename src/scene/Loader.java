@@ -40,6 +40,7 @@ public class Loader {
         levelCompletion.add(new LevelSaveEntry(Level3.class, false, false));
         levelCompletion.add(new LevelSaveEntry(Level4.class, false, false));
         levelCompletion.add(new LevelSaveEntry(Level5.class, false, false));
+        levelCompletion.add(new LevelSaveEntry(Level6.class, false, false));
     }
 
     /**

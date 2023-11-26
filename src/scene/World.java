@@ -102,7 +102,7 @@ public class World implements Runnable {
     // if all windows are valid, aka there are currently no overlaps
     public boolean isValidComposition() {
         for (Window window : windows) {
-            if (!window.panel.isOverlapping()) {
+            if (window.panel.isOverlapping(window)) {
                 return false;
             }
         }
