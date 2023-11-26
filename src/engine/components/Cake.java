@@ -11,6 +11,7 @@ public class Cake extends BoxCollider {
 
     @Override
     public void onTrigger(GameObject other) {
+        // only the player can activate it
         if (other.getComponent(Player.class) != null) {
             App.menu.onLevelComplete();
         }

@@ -6,6 +6,9 @@ import scene.World;
 import util.Rectangle;
 import window.Window;
 
+/**
+ * Implementation of Level 2
+ */
 public class Level2 extends World {
     public Level2() {
         name = "Level2";

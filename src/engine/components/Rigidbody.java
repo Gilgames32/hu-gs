@@ -9,15 +9,26 @@ import scene.World;
 import util.Coord;
 import util.Rectangle;
 
-// note: for some reason the collision dies if the size is an odd integer
+/**
+ * Rigidbody component for collisions
+ * Uses raycasting, was not meant for multiple rigidbodies colliding
+ * Pretty basic, can easily go out of bounds
+ * Note: for some reason the collision dies if the size is an odd integer
+ * due to the signedSizeXPer2 dividing by two I assume
+ * Would break if the transform is not centered around the position
+ */
 public class Rigidbody extends GameComponent {
+    // velocities
     double xVel = 0;
     double yVel = 0;
-    double gravityScale = .5;
-    Coord prevPos;
-    BoxCollider selfCollider;
 
-    List<CollisionListener> listeners = new LinkedList<>();
+    // accelaration due to gravity
+    double gravityScale = .5;
+
+    private Coord prevPos;
+    private BoxCollider selfCollider;
+
+    private List<CollisionListener> listeners = new LinkedList<>();
 
     @Override
     public void start() {
@@ -27,10 +38,12 @@ public class Rigidbody extends GameComponent {
 
     @Override
     public void update() {
+        // apply gravity
         yVel -= gravityScale;
 
         // next position is keyboard inputs + velocity
         Coord nextPos = new Coord(gameObject.position.x, gameObject.position.y);
+
         // apply the velocity
         nextPos.x += xVel;
         nextPos.y -= yVel;
@@ -134,10 +147,18 @@ public class Rigidbody extends GameComponent {
         prevPos = gameObject.position;
     }
 
+    /**
+     * Adds a CollisionListener to the listeners
+     * 
+     * @param newListener the listener in question
+     */
     public void addCollisionListener(CollisionListener newListener) {
         listeners.add(newListener);
     }
 
+    /**
+     * Notifies the listeners on land, calls their onLand function
+     */
     void listenersNotifyOnLand() {
         for (CollisionListener listener : listeners) {
             listener.onLand();

@@ -3,7 +3,6 @@ package engine.components;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.image.ImageObserver;
 
 import util.Coord;
 import util.Rectangle;
@@ -13,13 +12,20 @@ public class Intersection extends GameComponent {
     Window parentWindow;
     public Rectangle rect;
 
+    /**
+     * Parameterized constructor
+     * 
+     * @param initRect initial rectange, position is relative to the parent window,
+     *                 represents the overlapping rectangle
+     * @param window   corresponding window
+     */
     public Intersection(Rectangle initRect, Window window) {
         rect = initRect;
         parentWindow = window;
     }
 
     @Override
-    public void draw(Graphics g, Coord offset, ImageObserver imgObs) {
+    public void draw(Graphics g, Coord offset) {
         g.setColor(Color.CYAN);
         if (rect != null) {
             Rectangle relativeRect = rect.addPos(offset);
@@ -27,9 +33,13 @@ public class Intersection extends GameComponent {
         }
     }
 
+    /**
+     * Called when the component is clicked
+     * Moves window to to the nearest valid position
+     */
     public void onClick() {
-        // known bug: some (tested on cinnamon) desktop environments get the coordinates
-        // wrong
+        // known bug:
+        // some (tested on cinnamon) desktop environments get the coordinates wrong
 
         // move it wherever its closer
         if (rect.getSizeX() > rect.getSizeY()) {

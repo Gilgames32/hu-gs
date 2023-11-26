@@ -28,6 +28,10 @@ public class Menu extends JFrame {
     List<World> levels = new ArrayList<>();
     int lastLevel = 0;
 
+    /**
+     * Default constructor
+     * Builds the UI and loads the saves
+     */
     public Menu() {
         // window
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,7 +53,7 @@ public class Menu extends JFrame {
         JPanel menuPanel = new JPanel();
 
         // button
-        JButton button = new JButton("LOAD GAME");
+        JButton button = new JButton("LOAD LEVEL");
         button.addActionListener(new MenuButtonListener());
         menuPanel.add(button);
 
@@ -77,6 +81,9 @@ public class Menu extends JFrame {
         loadAndGenerateLevels();
     }
 
+    /**
+     * Listener for the load level button
+     */
     private class MenuButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -84,6 +91,9 @@ public class Menu extends JFrame {
         }
     }
 
+    /**
+     * Loads the playable level classes and instantiates the level objects
+     */
     private void loadAndGenerateLevels() {
         Loader.loadLevels();
 
@@ -105,6 +115,10 @@ public class Menu extends JFrame {
 
     }
 
+    /**
+     * Starts the index-th level
+     * @param index
+     */
     public void startLevel(int index) {
         lastLevel = index;
         if (index < 0) {
@@ -114,6 +128,11 @@ public class Menu extends JFrame {
         setVisible(false);
     }
 
+    /**
+     * Called when a level is completed
+     * Marks the level completed and the next one playable
+     * Saves the progress
+     */
     public void onLevelComplete() {
         for (Window window : World.windows) {
             window.frame.setVisible(false);

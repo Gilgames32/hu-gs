@@ -1,61 +1,52 @@
 package engine.components;
 
 import java.awt.Graphics;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 
-import engine.GameObject;
 import util.Coord;
+import util.Rectangle;
 
 public class Sprite extends GameComponent {
 
-    BufferedImage original;
     BufferedImage image;
-    BufferedImage flippedImage;
     public boolean flip;
 
-    public Sprite(String fileName) {
+    /**
+     * Parameterized constructor
+     * 
+     * @param imagePath path to the image file
+     */
+    public Sprite(String imagePath) {
         try {
-            original = ImageIO.read(new File(fileName));
+            image = ImageIO.read(new File(imagePath));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Parameterized constructor
+     * 
+     * @param bImage buffered image of the sprite
+     */
     public Sprite(BufferedImage bImage) {
-        original = bImage;
+        image = bImage;
     }
 
     @Override
-    public void initalize(GameObject parent) {
-        super.initalize(parent);
-
-        // scale
-        double scaleX = (double) gameObject.transform.rect.getSizeX() / original.getWidth();
-        double scaleY = (double) gameObject.transform.rect.getSizeY() / original.getHeight();
-        if (scaleX == 1 && scaleY == 1) {
-            image = original;
+    public void draw(Graphics g, Coord offset) {
+        Graphics2D g2d = (Graphics2D) g;
+        Rectangle bounds = gameObject.transform.rect;
+        Coord imageOffset = offset.add(bounds.toCoord());
+        if (!flip) {
+            g2d.drawImage(image, imageOffset.x, imageOffset.y, bounds.getSizeX(), bounds.getSizeY(), null);
         } else {
-            AffineTransform scaleInstance = AffineTransform.getScaleInstance(scaleX, scaleY);
-            AffineTransformOp scaleOp = new AffineTransformOp(scaleInstance, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-            image = scaleOp.filter(original, null);
+            g2d.drawImage(image, imageOffset.x + bounds.getSizeX(), imageOffset.y, -bounds.getSizeX(),
+                    bounds.getSizeY(), null);
         }
-
-        // flip
-        AffineTransform flipInstance = AffineTransform.getScaleInstance(-1, 1);
-        flipInstance.translate(-image.getWidth(null), 0);
-        AffineTransformOp flipOp = new AffineTransformOp(flipInstance, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-        flippedImage = flipOp.filter(image, null);
-    }
-
-    @Override
-    public void draw(Graphics g, Coord offset, ImageObserver imgObs) {
-        Coord imageOffset = offset.add(gameObject.transform.rect.toCoord());
-        g.drawImage(flip ? flippedImage : image, imageOffset.x, imageOffset.y, imgObs);
     }
 }

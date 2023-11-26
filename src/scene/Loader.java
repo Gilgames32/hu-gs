@@ -14,6 +14,9 @@ public class Loader {
     public static List<LevelSaveEntry> levelCompletion = null;
     public static final String FILENAME = "saves.dat";
 
+    /**
+     * Saves the levels at FILENAME
+     */
     public static void saveLevels() {
         File savesFile = new File(FILENAME);
         if (!savesFile.exists()) {
@@ -26,6 +29,9 @@ public class Loader {
         }
     }
 
+    /**
+     * Resets the level progression
+     */
     public static void resetLevels() {
         levelCompletion = new ArrayList<>();
         // build list
@@ -36,6 +42,9 @@ public class Loader {
         levelCompletion.add(new LevelSaveEntry(Level5.class, false, false));
     }
 
+    /**
+     * Loads the levels from FILENAME
+     */
     @SuppressWarnings("unchecked")
     public static void loadLevels() {
         File savesFile = new File(FILENAME);

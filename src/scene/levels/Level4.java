@@ -11,6 +11,9 @@ import window.Window;
 import java.awt.Color;
 import engine.components.SideBound.WindowSide;
 
+/**
+ * Implementation of Level 4
+ */
 public class Level4 extends World {
     public Level4() {
         name = "Level4";

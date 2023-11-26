@@ -7,6 +7,13 @@ public class LevelSaveEntry implements Serializable {
     boolean isPlayable = false;
     boolean isCompleted = false;
 
+    /**
+     * Parameterized constructor
+     * 
+     * @param lClass the class of the level
+     * @param isP if the level is playable
+     * @param isC if the level is completed
+     */
     LevelSaveEntry(Class<? extends World> lClass, boolean isP, boolean isC) {
         levelClass = lClass;
         isPlayable = isP;

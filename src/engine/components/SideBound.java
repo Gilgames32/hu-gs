@@ -15,18 +15,25 @@ import util.Rectangle;
 import window.Window;
 
 public class SideBound extends GameComponent {
+    // enum for the sides
     public enum WindowSide {
         NORTH, SOUTH, WEST, EAST
     }
 
-    public boolean vertical;
-
+    public boolean isVertical;
     public WindowSide side;
+
     public boolean solid = false;
 
     private Rectangle defaultRect;
     private static final int TRESHOLD = 10;
 
+    /**
+     * Parameterized constructor
+     * 
+     * @param windowRect the window's rectangle
+     * @param windowSide which side of the window it is on
+     */
     public SideBound(Rectangle windowRect, WindowSide windowSide) {
         side = windowSide;
         switch (windowSide) {
@@ -50,7 +57,7 @@ public class SideBound extends GameComponent {
                 break;
         }
 
-        vertical = windowSide == WindowSide.EAST || windowSide == WindowSide.WEST;
+        isVertical = windowSide == WindowSide.EAST || windowSide == WindowSide.WEST;
     }
 
     @Override
@@ -58,6 +65,10 @@ public class SideBound extends GameComponent {
         gameObject.transform.rect = defaultRect;
     }
 
+    /**
+     * Freezes a side, recalulates it's corresponding colliders and rectangles
+     * Makes a side solid
+     */
     public void freeze() {
         solid = true;
         switch (side) {
@@ -81,7 +92,7 @@ public class SideBound extends GameComponent {
                 break;
         }
         gameObject.transform.rect = defaultRect;
-        makeChild(0, vertical ? defaultRect.getSizeY() : defaultRect.getSizeX());
+        makeChild(0, isVertical ? defaultRect.getSizeY() : defaultRect.getSizeX());
         Box box = gameObject.getComponent(Box.class);
         if (box != null) {
             box.color = Color.GRAY;
@@ -90,13 +101,15 @@ public class SideBound extends GameComponent {
         }
     }
 
+    // recalculates
     public void recalc() {
+        // ignore solid ones
         if (solid) {
             return;
         }
 
+        // get overlaps
         List<Rectangle> overlapList = new ArrayList<>();
-
         for (Window window : World.windows) {
             Rectangle overlapRect = gameObject.transform.getAbsoluteRectangle().overlap(window.panel.rect);
             if (overlapRect != null) {
@@ -104,26 +117,19 @@ public class SideBound extends GameComponent {
             }
         }
 
-        // sort rectangles by x1
-        Collections.sort(overlapList, Comparator.comparing(Rectangle::getX1));
+        // sort overlap rectagnles by y1/x1 depending on verticality
+        Collections.sort(overlapList, Comparator.comparing(isVertical ? Rectangle::getY1 : Rectangle::getX1));
 
         // reset children
         gameObject.destroyAllChildren();
 
-        // 0 tól
-        // első x1ig
-        // create
-        // kövi
-        // x2től kövi x1ig
-        // ha negatív akkor nem
-        // kövi
-        // hacsak nem mennénk size fölé
+        // fill in blanks
+        // from previous y2/x2 to next y1/x1, with many many special cases
         Iterator<Rectangle> iter = overlapList.iterator();
-
         int i1 = 0;
         int i2 = 0;
         int max;
-        if (vertical) {
+        if (isVertical) {
             max = gameObject.transform.rect.getY2();
             while (iter.hasNext()) {
                 Rectangle current = iter.next();
@@ -173,15 +179,18 @@ public class SideBound extends GameComponent {
     void makeChild(int i1, int i2) {
         // check validity
         if (i1 < i2) {
+            // make the GameObject
             GameObject collider = new GameObject(0, 0, gameObject);
             Rectangle rect;
-            if (vertical) {
+            if (isVertical) {
                 rect = new Rectangle(0, i1, 10, i2 - i1);
             } else {
                 rect = new Rectangle(i1, 0, i2 - i1, 10);
             }
             collider.addComponent(new Transform(rect.addPos(gameObject.transform.rect)));
             collider.addComponent(new BoxCollider());
+
+            // artificially start it so components dont break
             collider.start();
         }
     }

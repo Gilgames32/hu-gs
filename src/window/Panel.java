@@ -104,16 +104,16 @@ public class Panel extends JPanel {
         for (GameObject child : World.root.children) {
             if (gameObject == child) {
                 for (GameObject ownChild : gameObject.children) {
-                    ownChild.draw(g, new Coord(0, 0), this);
+                    ownChild.draw(g, new Coord(0, 0));
                 }
             } else {
-                child.draw(g, rect.toCoord().multiply(-1), this);
+                child.draw(g, rect.toCoord().multiply(-1));
             }
         }
 
         // intersections
         for (GameObject intersection : intersections) {
-            intersection.draw(g, rect.toCoord().multiply(-1), this);
+            intersection.draw(g, rect.toCoord().multiply(-1));
         }
     }
 
