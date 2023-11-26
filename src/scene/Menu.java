@@ -100,7 +100,7 @@ public class Menu extends JFrame {
 
         comboBoxModel.removeAllElements();
         comboBoxModel.addAll(levels);
-        comboBox.setSelectedIndex(lastLevel);
+        comboBox.setSelectedIndex(levels.size()-1);
 
     }
 

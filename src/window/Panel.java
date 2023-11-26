@@ -114,11 +114,6 @@ public class Panel extends JPanel {
         // parent
         super.paintComponent(g);
 
-        // intersections
-        for (GameObject intersection : intersections) {
-            intersection.draw(g, rect.toCoord().multiply(-1), this);
-        }
-
         // itself and children
         for (GameObject child : World.root.children) {
             if (gameObject == child) {
@@ -128,6 +123,11 @@ public class Panel extends JPanel {
             } else {
                 child.draw(g, rect.toCoord().multiply(-1), this);
             }
+        }
+
+        // intersections
+        for (GameObject intersection : intersections) {
+            intersection.draw(g, rect.toCoord().multiply(-1), this);
         }
     }
 
