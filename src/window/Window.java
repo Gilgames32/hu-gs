@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import scene.App;
 import util.Rectangle;
 
 public class Window {
@@ -48,6 +49,9 @@ public class Window {
         // frame.setSize(rect.sizex, rect.sizey);
         // size is automatically set by making the panel fit
         frame.setResizable(false);
+
+        // set icon
+        frame.setIconImage(App.menu.icon.getImage());
 
         // finalize
         frame.pack();

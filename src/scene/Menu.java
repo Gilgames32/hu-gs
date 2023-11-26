@@ -21,8 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 import window.Window;
 
 public class Menu extends JFrame {
-    private JButton button;
-    private JLabel title;
+    public ImageIcon icon;
     private JComboBox<World> comboBox;
     private DefaultComboBoxModel<World> comboBoxModel;
 
@@ -33,13 +32,16 @@ public class Menu extends JFrame {
         // window
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("HU-GS");
-        setIconImage(new ImageIcon("./assets/icon.png").getImage());
         setPreferredSize(new Dimension(400, 300));
         setLayout(new BorderLayout());
         setResizable(false);
 
+        // icon
+        icon = new ImageIcon("./assets/icon.png");
+        setIconImage(icon.getImage());
+
         // title
-        title = new JLabel("HU-GS", SwingConstants.CENTER);
+        JLabel title = new JLabel("HU-GS", SwingConstants.CENTER);
         title.setFont(new Font("VCR OSD Mono", Font.BOLD, 72));
         add(title, BorderLayout.NORTH);
 
@@ -47,7 +49,7 @@ public class Menu extends JFrame {
         JPanel menuPanel = new JPanel();
 
         // button
-        button = new JButton("LOAD GAME");
+        JButton button = new JButton("LOAD GAME");
         button.addActionListener(new MenuButtonListener());
         menuPanel.add(button);
 
@@ -57,11 +59,10 @@ public class Menu extends JFrame {
         menuPanel.add(comboBox, BorderLayout.EAST);
 
         // image
-        ImageIcon img = new ImageIcon("assets/icon.png");
-        ImageIcon upscaledImg = new ImageIcon(img.getImage().getScaledInstance(img.getIconWidth() * 4, img.getIconHeight() * 4, Image.SCALE_SMOOTH));
+        ImageIcon upscaledImg = new ImageIcon(icon.getImage().getScaledInstance(icon.getIconWidth() * 4, icon.getIconHeight() * 4, Image.SCALE_SMOOTH));
         JLabel imgLabel = new JLabel(upscaledImg);
         // extra margin
-        imgLabel.setPreferredSize(new Dimension(img.getIconWidth() * 5, img.getIconHeight() * 5));
+        imgLabel.setPreferredSize(new Dimension(icon.getIconWidth() * 5, icon.getIconHeight() * 5));
         add(imgLabel, BorderLayout.SOUTH);
 
         // finalize
