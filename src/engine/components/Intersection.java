@@ -1,4 +1,5 @@
 package engine.components;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -35,8 +36,6 @@ public class Intersection extends GameComponent {
             Point pos = parentWindow.frame.getLocation();
             // offset depending on direction
             pos.y += rect.getY1() == parentWindow.panel.rect.getY1() ? rect.getSizeY() : -rect.getSizeY();
-            // epic fix xd
-            // pos.y += 18;
             parentWindow.frame.setLocation(pos);
         } else {
             Point pos = parentWindow.frame.getLocation();

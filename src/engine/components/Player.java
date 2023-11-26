@@ -4,10 +4,9 @@ import engine.listeners.CollisionListener;
 import scene.World;
 
 public class Player extends GameComponent implements CollisionListener {
-    final double speed = 5;
-    final double jumpForce = 12;
+    static final double SPEED = 5;
+    static final double JUMPFORCE = 12;
     boolean canJump = true;
-
 
     Rigidbody rigidbody;
     Sprite sprite;
@@ -17,24 +16,22 @@ public class Player extends GameComponent implements CollisionListener {
         rigidbody = gameObject.getComponent(Rigidbody.class);
         rigidbody.addCollisionListener(this);
         sprite = gameObject.getComponent(Sprite.class);
-        
-    }
 
+    }
 
     @Override
     public void update() {
         int kbx = World.keyboard.getAxisX();
-        rigidbody.xVel = kbx * speed;
+        rigidbody.xVel = kbx * SPEED;
         // jump
         if ((World.keyboard.getSpace() || World.keyboard.getAxisY() > 0) && canJump) {
-            rigidbody.yVel = jumpForce;
+            rigidbody.yVel = JUMPFORCE;
             canJump = false;
         }
 
         if (kbx > 0) {
             sprite.flip = false;
-        }
-        else if (kbx < 0) {
+        } else if (kbx < 0) {
             sprite.flip = true;
         }
     }

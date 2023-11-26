@@ -1,4 +1,5 @@
 package scene;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,6 +18,11 @@ public class World implements Runnable {
 
     private static Thread gameThread;
     private static Timer gameTimer;
+
+    // adding a bit of a cooldown after every framedrag so the collision doesnt
+    // break :3
+    public static int frameCoolDown = 30;
+
     public String name = "Hello World!";
 
     public static void reset() {
@@ -30,7 +36,6 @@ public class World implements Runnable {
     public void start() {
         // start stuff here idk
         // for now we use this for initialization
-
 
         // initalize gameobjects
         for (GameObject gameObject : root.children) {
@@ -54,8 +59,8 @@ public class World implements Runnable {
             public void run() {
                 validateWindows();
 
-                if (Window.frameCoolDown > 0) {
-                    Window.frameCoolDown--;
+                if (frameCoolDown > 0) {
+                    frameCoolDown--;
                 } else if (isValidComposition()) {
                     // update
                     update();

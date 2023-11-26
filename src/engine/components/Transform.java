@@ -18,7 +18,7 @@ public class Transform extends GameComponent {
     }
 
     public Transform(int sizeX, int sizeY) {
-        rect = new Rectangle(-sizeX/2, -sizeY/2, sizeX, sizeY);
+        rect = new Rectangle(-sizeX / 2, -sizeY / 2, sizeX, sizeY);
     }
 
     public Transform(Rectangle r) {

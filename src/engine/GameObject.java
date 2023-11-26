@@ -13,9 +13,9 @@ import util.*;
 public class GameObject {
     public Coord position = new Coord(0, 0);
     public Transform transform = null;
-    
+
     List<GameComponent> components = new ArrayList<>();
-    
+
     public GameObject parent = null;
     public List<GameObject> children = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class GameObject {
         for (GameComponent component : components) {
             component.start();
         }
-        
+
         // start children
         for (GameObject gameObject : children) {
             gameObject.start();
@@ -63,7 +63,6 @@ public class GameObject {
         }
     }
 
-
     public <T extends GameComponent> T getComponent(Class<T> type) {
         for (GameComponent component : components) {
             if (type.isInstance(component)) {
@@ -73,22 +72,22 @@ public class GameObject {
         return null;
     }
 
-    public void addComponent(GameComponent component){
+    public void addComponent(GameComponent component) {
         component.initalize(this);
         components.add(component);
     }
 
-    public Coord getAbsolutePosition(){
+    public Coord getAbsolutePosition() {
         // nyakkendő
         if (parent != null) {
             return position.add(parent.getAbsolutePosition());
-        }
-        else return position;
+        } else
+            return position;
     }
 
     public List<GameObject> getAllChildren() {
         // its children
-        List <GameObject> allChildren = new LinkedList<>(children);
+        List<GameObject> allChildren = new LinkedList<>(children);
 
         // and the children of children, if it has any
         if (!allChildren.isEmpty()) {

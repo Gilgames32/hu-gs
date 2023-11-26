@@ -59,7 +59,8 @@ public class Menu extends JFrame {
         menuPanel.add(comboBox, BorderLayout.EAST);
 
         // image
-        ImageIcon upscaledImg = new ImageIcon(icon.getImage().getScaledInstance(icon.getIconWidth() * 4, icon.getIconHeight() * 4, Image.SCALE_SMOOTH));
+        ImageIcon upscaledImg = new ImageIcon(icon.getImage().getScaledInstance(icon.getIconWidth() * 4,
+                icon.getIconHeight() * 4, Image.SCALE_SMOOTH));
         JLabel imgLabel = new JLabel(upscaledImg);
         // extra margin
         imgLabel.setPreferredSize(new Dimension(icon.getIconWidth() * 5, icon.getIconHeight() * 5));
@@ -100,7 +101,7 @@ public class Menu extends JFrame {
 
         comboBoxModel.removeAllElements();
         comboBoxModel.addAll(levels);
-        comboBox.setSelectedIndex(levels.size()-1);
+        comboBox.setSelectedIndex(levels.size() - 1);
 
     }
 
@@ -120,7 +121,7 @@ public class Menu extends JFrame {
         World.reset();
 
         Loader.levelCompletion.get(lastLevel).isCompleted = true;
-        if (lastLevel + 1 <  Loader.levelCompletion.size()) {
+        if (lastLevel + 1 < Loader.levelCompletion.size()) {
             Loader.levelCompletion.get(lastLevel + 1).isPlayable = true;
         }
         Loader.saveLevels();

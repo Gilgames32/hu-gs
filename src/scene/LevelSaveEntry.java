@@ -15,6 +15,6 @@ public class LevelSaveEntry implements Serializable {
 
     @Override
     public String toString() {
-        return new String(levelClass.getName() + "\t" + isPlayable + "\t" + isCompleted);
+        return levelClass.getName() + "\t" + isPlayable + "\t" + isCompleted;
     }
 }

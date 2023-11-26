@@ -14,7 +14,9 @@ import util.Coord;
 
 public class Sprite extends GameComponent {
 
-    BufferedImage original, image, flippedImage;
+    BufferedImage original;
+    BufferedImage image;
+    BufferedImage flippedImage;
     public boolean flip;
 
     public Sprite(String fileName) {
@@ -34,8 +36,8 @@ public class Sprite extends GameComponent {
         super.initalize(parent);
 
         // scale
-        double scaleX = gameObject.transform.rect.getSizeX() / original.getWidth();
-        double scaleY = gameObject.transform.rect.getSizeY() / original.getHeight();
+        double scaleX = (double) gameObject.transform.rect.getSizeX() / original.getWidth();
+        double scaleY = (double) gameObject.transform.rect.getSizeY() / original.getHeight();
         if (scaleX == 1 && scaleY == 1) {
             image = original;
         } else {

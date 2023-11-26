@@ -7,6 +7,10 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Prefabs {
+
+    Prefabs() {
+    }
+
     public static GameObject playerPrefab(int x, int y, GameObject parent) {
         GameObject player = new GameObject(x, y, parent);
         player.addComponent(new Transform(34, 22));
@@ -41,7 +45,7 @@ public class Prefabs {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         GameObject platform = new GameObject(x, y, parent);
         platform.addComponent(new Transform(img.getWidth(), img.getHeight(), 0, 0));
         platform.addComponent(new Sprite(img));

@@ -1,9 +1,10 @@
 package window;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -18,9 +19,7 @@ import scene.World;
 import util.*;
 
 public class Panel extends JPanel {
-    // some data structure for stuff to draw:
-    // probably gotta make one small list for global stuff like player
-    // and a local stuff like a tilemap or some
+
     public Rectangle rect;
 
     // storing where its currently overlapping
@@ -29,7 +28,7 @@ public class Panel extends JPanel {
     public GameObject gameObject = null;
 
     // north, south, west, east
-    public Map<WindowSide, SideBound> bounds = new HashMap<>();
+    public Map<WindowSide, SideBound> bounds = new EnumMap<>(WindowSide.class);
 
     public Panel(Rectangle initRect) {
         rect = initRect;
@@ -43,16 +42,15 @@ public class Panel extends JPanel {
 
         // initialize gameobject
         gameObject = new GameObject(0, 0, World.root);
-        
-        initializeBounds(initRect);
+
+        initializeBounds();
 
     }
 
     public void onWindowDrag(Window window) {
         World.keyboard.releaseAll();
 
-
-        Coord prevLocation = rect.toCoord(); 
+        Coord prevLocation = rect.toCoord();
         Coord nextLocation = new Coord(getLocationOnScreen());
 
         // move entities inside it
@@ -83,30 +81,18 @@ public class Panel extends JPanel {
             }
             otherWindow.panel.intersections.clear();
 
-            // todo:
-            // check who its connected with and where
-            // giving us the info where we can remove wallhitbox
-            // thus letting the player move between screens
-
             // overlapping rectangle
             Rectangle overlapRect = rect.overlap(otherWindow.panel.rect);
-
-            // ignore no overlaps
-            if (overlapRect == null) {
-                continue;
-            } else {
-                // TODO: stinky code
+            if (overlapRect != null) {
                 GameObject isec = new GameObject(0, 0, null);
                 isec.addComponent(new Intersection(overlapRect, window));
                 intersections.add(isec);
             }
-
         }
-
     }
 
     public boolean isOverlapping() {
-        return intersections.size() == 0;
+        return intersections.isEmpty();
     }
 
     @Override
@@ -132,18 +118,18 @@ public class Panel extends JPanel {
     }
 
     public void mouseClicked(MouseEvent e) {
-        for (GameObject gameObject : intersections) {
-            Intersection isec = gameObject.getComponent(Intersection.class);
-            if (isec == null) { continue; }
+        for (GameObject isecGameObject : intersections) {
+            Intersection isec = isecGameObject.getComponent(Intersection.class);
+            if (isec == null) {
+                continue;
+            }
             if (isec.rect.subPos(rect).isPointInside(e.getPoint())) {
                 isec.onClick();
             }
         }
-        System.out.println(e.getPoint());
-
     }
 
-    public void initializeBounds(Rectangle initRect) {
+    public void initializeBounds() {
         for (WindowSide side : WindowSide.values()) {
             GameObject boundGameObject = new GameObject(0, 0, gameObject);
             boundGameObject.addComponent(new Transform(0, 0));

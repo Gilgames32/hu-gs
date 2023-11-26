@@ -7,7 +7,7 @@ import util.Rectangle;
 import window.Window;
 
 public class Level3 extends World {
-    public Level3 () {
+    public Level3() {
         name = "Level3";
     }
 
@@ -15,7 +15,6 @@ public class Level3 extends World {
     public void start() {
         Window w1 = new Window("kettőspont", new Rectangle(-400, 0, 400, 300));
         Window w2 = new Window("három", new Rectangle(400, 0, 400, 300));
-
 
         GameObject player = Prefabs.playerPrefab(200, 50, root);
         player.position = player.position.add(w1.panel.rect.toCoord());

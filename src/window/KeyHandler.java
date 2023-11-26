@@ -1,8 +1,12 @@
 package window;
+
 import java.awt.event.*;
 
 public class KeyHandler implements KeyListener {
-    boolean w, a, s, d;
+    boolean w;
+    boolean a;
+    boolean s;
+    boolean d;
     boolean space;
 
     public int getAxisX() {

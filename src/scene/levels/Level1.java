@@ -1,4 +1,5 @@
 package scene.levels;
+
 import engine.GameObject;
 import scene.Prefabs;
 import scene.World;
@@ -29,8 +30,6 @@ public class Level1 extends World {
 
         Prefabs.cakePrefab(150, 40, main);
 
-
-        
         super.start();
     }
 }

@@ -16,7 +16,7 @@ import window.Window;
 
 public class SideBound extends GameComponent {
     public enum WindowSide {
-        north, south, west, east
+        NORTH, SOUTH, WEST, EAST
     }
 
     public boolean vertical;
@@ -25,32 +25,32 @@ public class SideBound extends GameComponent {
     public boolean solid = false;
 
     private Rectangle defaultRect;
-    private static final int treshold = 10;
+    private static final int TRESHOLD = 10;
 
     public SideBound(Rectangle windowRect, WindowSide windowSide) {
         side = windowSide;
         switch (windowSide) {
-            case north:
-                defaultRect = new Rectangle(0, -treshold, windowRect.getSizeX(), treshold);
+            case NORTH:
+                defaultRect = new Rectangle(0, -TRESHOLD, windowRect.getSizeX(), TRESHOLD);
                 break;
 
-            case south:
-                defaultRect = new Rectangle(0, windowRect.getSizeY(), windowRect.getSizeX(), treshold);
+            case SOUTH:
+                defaultRect = new Rectangle(0, windowRect.getSizeY(), windowRect.getSizeX(), TRESHOLD);
                 break;
 
-            case west:
-                defaultRect = new Rectangle(-treshold, 0, treshold, windowRect.getSizeY());
+            case WEST:
+                defaultRect = new Rectangle(-TRESHOLD, 0, TRESHOLD, windowRect.getSizeY());
                 break;
 
-            case east:
-                defaultRect = new Rectangle(windowRect.getSizeX(), 0, treshold, windowRect.getSizeY());
+            case EAST:
+                defaultRect = new Rectangle(windowRect.getSizeX(), 0, TRESHOLD, windowRect.getSizeY());
                 break;
 
             default:
                 break;
         }
 
-        vertical = windowSide == WindowSide.east ||windowSide == WindowSide.west;
+        vertical = windowSide == WindowSide.EAST || windowSide == WindowSide.WEST;
     }
 
     @Override
@@ -61,20 +61,20 @@ public class SideBound extends GameComponent {
     public void freeze() {
         solid = true;
         switch (side) {
-            case north:
-                defaultRect.setY1(defaultRect.getY1() + treshold);
+            case NORTH:
+                defaultRect.setY1(defaultRect.getY1() + TRESHOLD);
                 break;
 
-            case south:
-                defaultRect.setY1(defaultRect.getY1() - treshold);
+            case SOUTH:
+                defaultRect.setY1(defaultRect.getY1() - TRESHOLD);
                 break;
 
-            case west:
-                defaultRect.setX1(defaultRect.getX1() + treshold);
+            case WEST:
+                defaultRect.setX1(defaultRect.getX1() + TRESHOLD);
                 break;
 
-            case east:
-                defaultRect.setX1(defaultRect.getX1() - treshold);
+            case EAST:
+                defaultRect.setX1(defaultRect.getX1() - TRESHOLD);
                 break;
 
             default:
@@ -85,8 +85,7 @@ public class SideBound extends GameComponent {
         Box box = gameObject.getComponent(Box.class);
         if (box != null) {
             box.color = Color.GRAY;
-        }
-        else {
+        } else {
             gameObject.addComponent(new Box(Color.GRAY));
         }
     }
@@ -104,11 +103,6 @@ public class SideBound extends GameComponent {
                 overlapList.add(overlapRect.subPos(gameObject.transform.getAbsoluteRectangle()));
             }
         }
-
-        // gameObject.getComponent(Box.class).color = overlapList.isEmpty() ? Color.BLUE
-        // : Color.RED;
-        // boxCollider.isTrigger = !overlapList.isEmpty();
-        // TODO: use multiple boxcolliders as children (child labor)
 
         // sort rectangles by x1
         Collections.sort(overlapList, Comparator.comparing(Rectangle::getX1));

@@ -18,15 +18,14 @@ public class DebugLevel extends World {
         new Window("UwU", new Rectangle(100, 100, 400, 300));
         new Window("OwO", new Rectangle(100 + 400, 100, 400, 300));
         new Window(">w<", new Rectangle(100, 100 + 300, 200, 150));
-        
+
         Prefabs.playerPrefab(300, 200, root);
         Prefabs.cakePrefab(200, 500, root);
-        
+
         GameObject box = new GameObject(100, 100, windows.get(0).panel.gameObject);
         box.addComponent(new Transform(400, 50, 0, 0));
         box.addComponent(new BoxCollider());
         box.addComponent(new Box());
-
 
         super.start();
     }

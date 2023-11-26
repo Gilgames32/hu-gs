@@ -11,12 +11,13 @@ public class Box extends GameComponent {
     public Color color = Color.BLACK;
     Transform transform = null;
 
-    public Box() {}
+    public Box() {
+    }
 
     public Box(Color c) {
         color = c;
     }
-    
+
     @Override
     public void start() {
         transform = gameObject.getComponent(Transform.class);
@@ -30,5 +31,5 @@ public class Box extends GameComponent {
         g.setColor(color);
         Rectangle relativeRect = transform.rect.addPos(offset);
         g.fillRect(relativeRect.getX1(), relativeRect.getY1(), relativeRect.getSizeX(), relativeRect.getSizeY());
-    }   
+    }
 }

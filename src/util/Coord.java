@@ -25,6 +25,6 @@ public class Coord {
     }
 
     public Coord multiply(double lambda) {
-        return new Coord((int)(x*lambda), (int)(y*lambda));
+        return new Coord((int) (x * lambda), (int) (y * lambda));
     }
 }

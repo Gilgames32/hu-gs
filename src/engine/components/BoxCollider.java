@@ -31,6 +31,6 @@ public class BoxCollider extends GameComponent {
     }
 
     public void onTrigger(GameObject other) {
-
+        // abstract
     }
 }

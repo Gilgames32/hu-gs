@@ -16,14 +16,12 @@ public class Window {
     Point windowPos = null;
     public boolean draggable = true;
 
-    // adding a bit of a cooldown after every framedrag so the collision doesnt break :3
-    public static int frameCoolDown = 30;
-
     public Window(String title, Rectangle initRect) {
         // move frame relative to the center of the screen
         Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-        initRect = initRect.addPos((int)screensize.getWidth() / 2, (int)screensize.getHeight() / 2).subPos(initRect.getSizeX() / 2, initRect.getSizeY() / 2);
-        
+        initRect = initRect.addPos((int) screensize.getWidth() / 2, (int) screensize.getHeight() / 2)
+                .subPos(initRect.getSizeX() / 2, initRect.getSizeY() / 2);
+
         frame = new JFrame(title);
         panel = new Panel(initRect);
 
@@ -31,7 +29,7 @@ public class Window {
         frame.add(panel);
 
         // set up listeners
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentMoved(final ComponentEvent e) {
@@ -51,7 +49,6 @@ public class Window {
         // set size and location
         windowPos = new Point(initRect.getX1(), initRect.getY1());
         frame.setLocation(windowPos);
-        // frame.setSize(rect.sizex, rect.sizey);
         // size is automatically set by making the panel fit
         frame.setResizable(false);
 
@@ -76,7 +73,7 @@ public class Window {
                 frame.setLocation(windowPos);
             }
         }
-        frameCoolDown = 4;
+        World.frameCoolDown = 4;
     }
 
 }
