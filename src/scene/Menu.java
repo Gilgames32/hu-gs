@@ -31,7 +31,7 @@ public class Menu extends JFrame {
     public Menu() {
         // window
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("HU-GS");
+        setTitle("HU-GS Universe - Ghost Screens");
         setPreferredSize(new Dimension(400, 300));
         setLayout(new BorderLayout());
         setResizable(false);
@@ -120,7 +120,9 @@ public class Menu extends JFrame {
         World.reset();
 
         Loader.levelCompletion.get(lastLevel).isCompleted = true;
-        Loader.levelCompletion.get(lastLevel + 1).isPlayable = true;
+        if (lastLevel + 1 <  Loader.levelCompletion.size()) {
+            Loader.levelCompletion.get(lastLevel + 1).isPlayable = true;
+        }
         Loader.saveLevels();
 
         loadAndGenerateLevels();
