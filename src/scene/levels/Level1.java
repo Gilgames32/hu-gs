@@ -1,6 +1,5 @@
 package scene.levels;
 import engine.GameObject;
-import engine.components.*;
 import scene.Prefabs;
 import scene.World;
 import util.Rectangle;
@@ -13,21 +12,24 @@ public class Level1 extends World {
 
     @Override
     public void start() {
+        GameObject bg = Prefabs.imagePrefab(0, -50, "./assets/l1_bg.png", root);
 
-        windows.add(new Window("UwU", new Rectangle(100, 100, 400, 300)));
-        windows.add(new Window("OwO", new Rectangle(100 + 400, 100, 400, 300)));
-        windows.add(new Window(">w<", new Rectangle(100, 100 + 300, 200, 150)));
-        
-        Prefabs.playerPrefab(300, 200, root);
-        Prefabs.cakePrefab(100, 100, windows.get(1).panel.gameObject);
+        Window mainWindow = new Window("WASD SPACE", new Rectangle(0, 0, 400, 300));
+        GameObject main = mainWindow.panel.gameObject;
+        windows.add(mainWindow);
 
-        
-        GameObject box = new GameObject(100, 100, windows.get(0).panel.gameObject);
-        box.addComponent(new Transform(400, 50, 0, 0));
-        box.addComponent(new BoxCollider());
-        box.addComponent(new Box());
+        bg.position = bg.position.add(mainWindow.panel.rect.toCoord());
 
-        // windows.get(0).panel.bounds.get(WindowSide.east).freeze();
+        GameObject player = Prefabs.playerPrefab(200, 150, root);
+        player.position = player.position.add(mainWindow.panel.rect.toCoord());
+
+        Prefabs.platformPrefab(0, 300 - 24, 400, 24, main);
+        Prefabs.platformPrefab(300, 150, 100, 24, main);
+        Prefabs.platformPrefab(100, 50, 100, 24, main);
+
+        Prefabs.cakePrefab(150, 40, main);
+
+
         
         super.start();
     }

@@ -19,6 +19,10 @@ public class Window {
     public static int frameCoolDown = 30;
 
     public Window(String title, Rectangle initRect) {
+        // move frame relative to the center of the screen
+        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+        initRect = initRect.addPos((int)screensize.getWidth() / 2, (int)screensize.getHeight() / 2).subPos(initRect.getSizeX() / 2, initRect.getSizeY() / 2);
+        
         frame = new JFrame(title);
         panel = new Panel(initRect);
 

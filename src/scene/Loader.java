@@ -34,7 +34,7 @@ public class Loader {
     public static void resetLevels() {
         levelCompletion = new ArrayList<>();
         // build list
-        levelCompletion.add(new LevelSaveEntry(DebugLevel.class, true, false));
+        // levelCompletion.add(new LevelSaveEntry(DebugLevel.class, true, false));
         levelCompletion.add(new LevelSaveEntry(Level1.class, true, false));
         levelCompletion.add(new LevelSaveEntry(Level2.class, false, false));
 

@@ -110,6 +110,10 @@ public class Rectangle {
         return new Rectangle(getX1() - other.x, getY1() - other.y, sizeX, sizeY);
     }
 
+    public Rectangle subPos(int subX, int subY) {
+        return new Rectangle(getX1() - subX, getY1() - subY, sizeX, sizeY);
+    }
+
     // add
     public Rectangle addPos(Rectangle other) {
         return new Rectangle(getX1() + other.getX1(), getY1() + other.getY1(), sizeX, sizeY);
@@ -117,6 +121,10 @@ public class Rectangle {
 
     public Rectangle addPos(Coord other) {
         return new Rectangle(getX1() + other.x, getY1() + other.y, sizeX, sizeY);
+    }
+
+    public Rectangle addPos(int addX, int addY) {
+        return new Rectangle(getX1() + addX, getY1() + addY, sizeX, sizeY);
     }
 
     public boolean isPointInside(Point p) {

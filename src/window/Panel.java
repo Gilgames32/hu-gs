@@ -139,6 +139,7 @@ public class Panel extends JPanel {
                 isec.onClick();
             }
         }
+        System.out.println(e.getPoint());
 
     }
 

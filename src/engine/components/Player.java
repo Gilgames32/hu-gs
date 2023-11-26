@@ -4,7 +4,8 @@ import engine.listeners.CollisionListener;
 import scene.World;
 
 public class Player extends GameComponent implements CollisionListener {
-    double speed = 5;
+    final double speed = 5;
+    final double jumpForce = 12;
     boolean canJump = true;
 
 
@@ -25,8 +26,8 @@ public class Player extends GameComponent implements CollisionListener {
         int kbx = World.keyboard.getAxisX();
         rigidbody.xVel = kbx * speed;
         // jump
-        if (World.keyboard.getSpace() && canJump) {
-            rigidbody.yVel = 10;
+        if ((World.keyboard.getSpace() || World.keyboard.getAxisY() > 0) && canJump) {
+            rigidbody.yVel = jumpForce;
             canJump = false;
         }
 

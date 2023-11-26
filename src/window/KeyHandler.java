@@ -18,9 +18,9 @@ public class KeyHandler implements KeyListener {
         int axisy = 0;
         // on the screen y is inverted
         if (w)
-            axisy -= 1;
-        if (s)
             axisy += 1;
+        if (s)
+            axisy -= 1;
         return axisy;
     }
 
