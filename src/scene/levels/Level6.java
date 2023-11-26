@@ -20,7 +20,7 @@ public class Level6 extends World {
     @Override
     public void start() {
 
-        Window w1 = new Window("may", new Rectangle(0, 0, 400, 300));
+        Window w1 = new Window("is", new Rectangle(0, 0, 400, 300));
         w1.panel.bounds.get(WindowSide.NORTH).freeze();
 
         Prefabs.platformPrefab(300, 250, 100, 24, w1.panel.gameObject);
@@ -36,9 +36,9 @@ public class Level6 extends World {
         Prefabs.cakePrefab(25, 25, w1.panel.gameObject);
 
         // Window w2 = 
-        new Window("hurry", new Rectangle(-400, 0, 400, 200));
+        new Window("the fog", new Rectangle(-400, 0, 400, 200));
 
-        Window w3 = new Window("corn", new Rectangle(400, 0, 400, 200));
+        Window w3 = new Window("coming", new Rectangle(400, 0, 400, 200));
         Prefabs.trampolinePrefab(0, 200 - 24, 400, 24, w3.panel.gameObject);
 
         super.start();
