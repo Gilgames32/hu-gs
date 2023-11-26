@@ -36,7 +36,8 @@ public class Loader {
         // build list
         // levelCompletion.add(new LevelSaveEntry(DebugLevel.class, true, false));
         levelCompletion.add(new LevelSaveEntry(Level1.class, true, false));
-        levelCompletion.add(new LevelSaveEntry(Level2.class, false, false));
+        levelCompletion.add(new LevelSaveEntry(Level2.class, true, false));
+        levelCompletion.add(new LevelSaveEntry(Level3.class, true, false));
 
         System.out.println("Levels reset");
     }
