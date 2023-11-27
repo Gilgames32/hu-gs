@@ -1,4 +1,5 @@
 *.class
 saves.dat
 .VSCodeCounter/
-./docs/javadoc
+docs/javadoc
+lib/
