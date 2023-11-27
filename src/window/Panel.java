@@ -27,9 +27,13 @@ public class Panel extends JPanel {
 
     public GameObject gameObject = null;
 
-    // north, south, west, east
     public Map<WindowSide, SideBound> bounds = new EnumMap<>(WindowSide.class);
 
+    /**
+     * Parameterized constructor
+     * 
+     * @param initRect the initial position and size of the panel
+     */
     public Panel(Rectangle initRect) {
         rect = initRect;
 
@@ -47,6 +51,12 @@ public class Panel extends JPanel {
 
     }
 
+    /**
+     * Handles window drags
+     * Called whenever the window containing it is dragged
+     * 
+     * @param window corresponding window
+     */
     public void onWindowDrag(Window window) {
         World.keyboard.releaseAll();
 
@@ -72,6 +82,11 @@ public class Panel extends JPanel {
         World.recalcSideBounds();
     }
 
+    /**
+     * Generates the intersection rectangles where it overlaps with other windows
+     * 
+     * @param window the window containing it
+     */
     public void validatePos(Window window) {
         intersections.clear();
         for (Window otherWindow : World.windows) {
@@ -91,6 +106,12 @@ public class Panel extends JPanel {
         }
     }
 
+    /**
+     * Decides if its overlapping with any other windows
+     * 
+     * @param window the window containing it
+     * @return wether it overlaps
+     */
     public boolean isOverlapping(Window window) {
         for (Window otherWindow : World.windows) {
             // dont compare to self
@@ -128,6 +149,12 @@ public class Panel extends JPanel {
         }
     }
 
+    /**
+     * Called on every mouseclick
+     * Notifies the intersections that were clicked
+     * 
+     * @param e
+     */
     public void mouseClicked(MouseEvent e) {
         for (GameObject isecGameObject : intersections) {
             Intersection isec = isecGameObject.getComponent(Intersection.class);
@@ -140,6 +167,9 @@ public class Panel extends JPanel {
         }
     }
 
+    /**
+     * Initializes the sidebounds
+     */
     public void initializeBounds() {
         for (WindowSide side : WindowSide.values()) {
             GameObject boundGameObject = new GameObject(0, 0, gameObject);
@@ -149,6 +179,9 @@ public class Panel extends JPanel {
         }
     }
 
+    /**
+     * Recalculates every sidebound
+     */
     public void recalcBounds() {
         for (SideBound side : bounds.values()) {
             side.recalc();

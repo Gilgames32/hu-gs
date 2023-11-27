@@ -41,7 +41,7 @@ public class Transform extends GameComponent {
      * @param r transform rectangle
      */
     public Transform(Rectangle r) {
-        rect = new Rectangle(r);
+        rect = r;
     }
 
     /**

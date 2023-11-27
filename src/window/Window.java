@@ -16,6 +16,12 @@ public class Window {
     Point windowPos = null;
     public boolean draggable = true;
 
+    /**
+     * Parameterized constructor
+     * 
+     * @param title
+     * @param initRect
+     */
     public Window(String title, Rectangle initRect) {
         // move frame relative to the center of the screen
         Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -62,17 +68,25 @@ public class Window {
         World.windows.add(this);
     }
 
+    /**
+     * Listener function
+     * Called when a window is moved or it's focus is changed
+     * Cancels moves if the window is not draggable
+     */
     void onWindowDrag() {
         // this is to not get errors on the first few frames due to some desktop
         // environments
-        if (frame.isShowing()) {
-            if (draggable) {
-                windowPos = frame.getLocationOnScreen();
-                panel.onWindowDrag(this);
-            } else {
-                frame.setLocation(windowPos);
-            }
+        if (!frame.isShowing()) {
+            return;
         }
+
+        if (draggable) {
+            windowPos = frame.getLocationOnScreen();
+            panel.onWindowDrag(this);
+        } else {
+            frame.setLocation(windowPos);
+        }
+
         World.frameCoolDown = 4;
     }
 

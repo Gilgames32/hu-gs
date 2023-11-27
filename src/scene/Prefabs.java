@@ -8,9 +8,20 @@ import javax.imageio.ImageIO;
 
 public class Prefabs {
 
+    /**
+     * Private constructor, so it cannot be instantiated
+     */
     Prefabs() {
     }
 
+    /**
+     * Generates the typical player GameObject
+     * 
+     * @param x      initial x position
+     * @param y      initial y position
+     * @param parent parent GameObject
+     * @return the player GameObject
+     */
     public static GameObject playerPrefab(int x, int y, GameObject parent) {
         GameObject player = new GameObject(x, y, parent);
         player.addComponent(new Transform(34, 22));
@@ -22,6 +33,14 @@ public class Prefabs {
         return player;
     }
 
+    /**
+     * Generates the typical cake GameObject
+     * 
+     * @param x      x position
+     * @param y      y position
+     * @param parent parent GameObject
+     * @return the cake GameObject
+     */
     public static GameObject cakePrefab(int x, int y, GameObject parent) {
         GameObject cake = new GameObject(x, y, parent);
         cake.addComponent(new Transform(20, 16));
@@ -30,6 +49,16 @@ public class Prefabs {
         return cake;
     }
 
+    /**
+     * Generates the typical platform GameObject
+     * 
+     * @param x      x position
+     * @param y      y position
+     * @param sizex  width
+     * @param sizey  height
+     * @param parent parent GameObject
+     * @return the platform GameObject
+     */
     public static GameObject platformPrefab(int x, int y, int sizex, int sizey, GameObject parent) {
         GameObject platform = new GameObject(x, y, parent);
         platform.addComponent(new Transform(sizex, sizey, 0, 0));
@@ -38,10 +67,19 @@ public class Prefabs {
         return platform;
     }
 
-    public static GameObject imagePrefab(int x, int y, String fileName, GameObject parent) {
+    /**
+     * Generates the typical GameObject with just a sprite
+     * 
+     * @param x        x position
+     * @param y        y position
+     * @param filePath path to the image file
+     * @param parent   parent GameObject
+     * @return the sprite's GameObject
+     */
+    public static GameObject imagePrefab(int x, int y, String filePath, GameObject parent) {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File(fileName));
+            img = ImageIO.read(new File(filePath));
         } catch (Exception e) {
             e.printStackTrace();
         }

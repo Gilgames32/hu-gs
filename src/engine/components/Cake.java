@@ -5,6 +5,9 @@ import scene.App;
 
 public class Cake extends BoxCollider {
 
+    /**
+     * Default constructor
+     */
     public Cake() {
         isTrigger = true;
     }

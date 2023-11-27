@@ -179,6 +179,9 @@ public class Rigidbody extends GameComponent {
         }
     }
 
+    /**
+     * Notifies the listeners on collision, calls their onCollision function
+     */
     void listenersNotifyOnCollision(GameObject other) {
         for (CollisionListener listener : listeners) {
             listener.onCollision(other);

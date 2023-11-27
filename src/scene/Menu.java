@@ -117,6 +117,7 @@ public class Menu extends JFrame {
 
     /**
      * Starts the index-th level
+     * 
      * @param index
      */
     public void startLevel(int index) {

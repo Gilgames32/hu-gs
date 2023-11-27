@@ -35,6 +35,7 @@ public class SideBound extends GameComponent {
      * @param windowSide which side of the window it is on
      */
     public SideBound(Rectangle windowRect, WindowSide windowSide) {
+        // set its position and size depending on the window and the side
         side = windowSide;
         switch (windowSide) {
             case NORTH:
@@ -70,6 +71,7 @@ public class SideBound extends GameComponent {
      * Makes a side solid
      */
     public void freeze() {
+        // move it inside the window and make it solid
         solid = true;
         switch (side) {
             case NORTH:
@@ -91,6 +93,7 @@ public class SideBound extends GameComponent {
             default:
                 break;
         }
+        // give itself a collider
         gameObject.transform.rect = defaultRect;
         makeChild(0, isVertical ? defaultRect.getSizeY() : defaultRect.getSizeX());
         Box box = gameObject.getComponent(Box.class);
@@ -101,7 +104,10 @@ public class SideBound extends GameComponent {
         }
     }
 
-    // recalculates
+    /**
+     * Calculates where the colliders of this side should be depending on the
+     * windows overlapping with it
+     */
     public void recalc() {
         // ignore solid ones
         if (solid) {
@@ -176,6 +182,12 @@ public class SideBound extends GameComponent {
         }
     }
 
+    /**
+     * Creates a collider from i1 to i2 depending on the size, if its valid
+     * 
+     * @param i1 start of the collider
+     * @param i2 end of the collider
+     */
     void makeChild(int i1, int i2) {
         // check validity
         if (i1 < i2) {
@@ -190,7 +202,7 @@ public class SideBound extends GameComponent {
             collider.addComponent(new Transform(rect.addPos(gameObject.transform.rect)));
             collider.addComponent(new BoxCollider());
 
-            // artificially start it so components dont break
+            // artificially start it so components don't break
             collider.start();
         }
     }

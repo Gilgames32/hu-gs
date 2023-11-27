@@ -10,14 +10,24 @@ import engine.components.Transform;
 import util.*;
 
 public class GameObject {
+    // position and bounds
     public Coord position = new Coord(0, 0);
     public Transform transform = null;
 
-    List<GameComponent> components = new ArrayList<>();
-
+    // hierarchy
     public GameObject parent = null;
     public List<GameObject> children = new ArrayList<>();
 
+    // components
+    List<GameComponent> components = new ArrayList<>();
+
+    /**
+     * Parameterized constructor
+     * 
+     * @param x          initial x position
+     * @param y          initial y position
+     * @param initParent intial parent GameObject
+     */
     public GameObject(int x, int y, GameObject initParent) {
         position.x = x;
         position.y = y;
@@ -27,6 +37,12 @@ public class GameObject {
         }
     }
 
+    /**
+     * Draw function to draw all components and children
+     * 
+     * @param g      Graphics
+     * @param offset the offset relative to the window
+     */
     public void draw(Graphics g, Coord offset) {
         for (GameComponent component : components) {
             component.draw(g, offset.add(position));
@@ -38,6 +54,10 @@ public class GameObject {
         }
     }
 
+    /**
+     * Start function to start components and children
+     * Called before the first frame
+     */
     public void start() {
         // start itself
         for (GameComponent component : components) {
@@ -50,6 +70,10 @@ public class GameObject {
         }
     }
 
+    /**
+     * Update function to update components and children
+     * Called every frame
+     */
     public void update() {
         // update self
         for (GameComponent component : components) {
@@ -62,6 +86,14 @@ public class GameObject {
         }
     }
 
+    /**
+     * Gets the specified type of GameComponent
+     * 
+     * @param <T>  the type of the component
+     * @param type the class of the component
+     * @return the component in question, or null if the GameObject does not have
+     *         one
+     */
     public <T extends GameComponent> T getComponent(Class<T> type) {
         for (GameComponent component : components) {
             if (type.isInstance(component)) {
@@ -71,11 +103,23 @@ public class GameObject {
         return null;
     }
 
+    /**
+     * Adds a component to the list of components, and initializes it (sets the
+     * parent)
+     * Does NOT start the component
+     * 
+     * @param component the component in question
+     */
     public void addComponent(GameComponent component) {
         component.initalize(this);
         components.add(component);
     }
 
+    /**
+     * Gets the absolute position (screen space)
+     * 
+     * @return the absolute position
+     */
     public Coord getAbsolutePosition() {
         // nyakkendő
         if (parent != null) {
@@ -84,6 +128,11 @@ public class GameObject {
             return position;
     }
 
+    /**
+     * Gets every GameObject which is below this in the hierarchy
+     * 
+     * @return the list of GameObjects
+     */
     public List<GameObject> getAllChildren() {
         // its children
         List<GameObject> allChildren = new LinkedList<>(children);
@@ -98,15 +147,19 @@ public class GameObject {
         return allChildren;
     }
 
+    /**
+     * Destroy this GameObject, and everything below it in the hierarchy
+     * Removes it from it's parent's childrens
+     */
     public void destroy() {
-        for (GameObject child : children) {
-            child.destroy();
-        }
-        children.clear();
+        destroyAllChildren();
         parent.children.remove(this);
         parent = null;
     }
 
+    /**
+     * Destroys all of it's children, and everything below it in the hierarchy
+     */
     public void destroyAllChildren() {
         for (GameObject child : children) {
             child.destroyAllChildren();

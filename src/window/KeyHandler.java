@@ -9,6 +9,11 @@ public class KeyHandler implements KeyListener {
     boolean d;
     boolean space;
 
+    /**
+     * Gets the direction of the horizontal input
+     * 
+     * @return the x axis of the input
+     */
     public int getAxisX() {
         int axisx = 0;
         if (d)
@@ -18,6 +23,11 @@ public class KeyHandler implements KeyListener {
         return axisx;
     }
 
+    /**
+     * Gets the direction of the vertical input
+     * 
+     * @return the y axis of the input
+     */
     public int getAxisY() {
         int axisy = 0;
         // on the screen y is inverted
@@ -28,10 +38,19 @@ public class KeyHandler implements KeyListener {
         return axisy;
     }
 
+    /**
+     * Getter for the state of the space key
+     * 
+     * @return wether space is pressed
+     */
     public boolean getSpace() {
         return space;
     }
 
+    /**
+     * Artifiaclly releases every key
+     * This is to prevent sticky keys on windows being dragged
+     */
     public void releaseAll() {
         // this line looks kinda cool
         w = a = s = d = false;

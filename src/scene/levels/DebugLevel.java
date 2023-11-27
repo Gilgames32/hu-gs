@@ -8,6 +8,9 @@ import scene.World;
 import util.Rectangle;
 import window.Window;
 
+/**
+ * Debug level for testing things out
+ */
 public class DebugLevel extends World {
     public DebugLevel() {
         name = "DEBUG";

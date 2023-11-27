@@ -8,5 +8,10 @@ public interface CollisionListener {
      */
     void onLand();
 
+    /**
+     * The abstract method for collisions
+     * 
+     * @param other
+     */
     void onCollision(GameObject other);
 }

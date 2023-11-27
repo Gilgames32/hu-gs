@@ -1,5 +1,8 @@
 package scene;
 
+/**
+ * Main
+ */
 public class App {
     public static Menu menu;
 

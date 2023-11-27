@@ -25,6 +25,15 @@ public class World implements Runnable {
 
     public String name = "Hello World!";
 
+    /**
+     * Default constructor
+     */
+    public World() {
+    }
+
+    /**
+     * Resets a world, re-initializes the static variables
+     */
     public static void reset() {
         gameTimer.cancel();
         windows = new ArrayList<>();
@@ -33,6 +42,9 @@ public class World implements Runnable {
         root = new GameObject(0, 0, null);
     }
 
+    /**
+     * Starts the GameObjects, and the gameThread
+     */
     public void start() {
         // start stuff here idk
         // for now we use this for initialization
@@ -48,6 +60,9 @@ public class World implements Runnable {
         gameThread.start();
     }
 
+    /**
+     * The game thread and the main loop, running at 90 FPS
+     */
     public void run() {
         int FPS = 90;
         // deltaTime in miliseconds
@@ -76,6 +91,9 @@ public class World implements Runnable {
         }, 0, deltaTime);
     }
 
+    /**
+     * Update method, called every frame
+     */
     public void update() {
         // update
         // update should follow the top down hierarchy
@@ -84,6 +102,9 @@ public class World implements Runnable {
         }
     }
 
+    /**
+     * Calls repaint() on every JFrame to update their content
+     */
     public void redraw() {
         // repaint components
         for (Window window : windows) {
@@ -91,6 +112,11 @@ public class World implements Runnable {
         }
     }
 
+    /**
+     * Notifies the windows that they were clicked
+     * 
+     * @param e mouse click event
+     */
     public static void mouseClicked(MouseEvent e) {
         for (Window window : windows) {
             if (window.frame.isActive()) {
@@ -99,7 +125,11 @@ public class World implements Runnable {
         }
     }
 
-    // if all windows are valid, aka there are currently no overlaps
+    /**
+     * Decides if the current composition of windows is valid (valid = no overlaps)
+     * 
+     * @return validity
+     */
     public boolean isValidComposition() {
         for (Window window : windows) {
             if (window.panel.isOverlapping(window)) {
@@ -109,6 +139,9 @@ public class World implements Runnable {
         return true;
     }
 
+    /**
+     * Makes windows undraggable if there is an invalid entity in them
+     */
     public void validateWindows() {
         for (Window window : World.windows) {
             window.draggable = true;
@@ -120,6 +153,9 @@ public class World implements Runnable {
         }
     }
 
+    /**
+     * Makes windows recalulate their sidebounds
+     */
     public static void recalcSideBounds() {
         for (Window window : windows) {
             window.panel.recalcBounds();

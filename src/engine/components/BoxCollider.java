@@ -39,12 +39,19 @@ public class BoxCollider extends GameComponent {
 
     /**
      * Unimplemented function, used in subclasses
+     * Called when this collider is a trigger and another collider enters it
      * 
-     * @param other
+     * @param other the other collider in question
      */
     public void onTrigger(GameObject other) {
     }
 
+    /**
+     * Unimplemented function, used in subclasses
+     * Called when a rigidbody collides with it
+     * 
+     * @param other the other collider in question
+     */
     public void onCollision(GameObject other) {
     }
 }

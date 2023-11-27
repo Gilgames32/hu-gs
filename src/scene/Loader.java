@@ -15,6 +15,12 @@ public class Loader {
     public static final String FILENAME = "saves.dat";
 
     /**
+     * Private constructor, so it cannot be instantiated
+     */
+    private Loader() {
+    }
+
+    /**
      * Saves the levels at FILENAME
      */
     public static void saveLevels() {

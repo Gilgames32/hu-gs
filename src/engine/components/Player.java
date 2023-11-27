@@ -48,6 +48,6 @@ public class Player extends GameComponent implements CollisionListener {
 
     @Override
     public void onCollision(GameObject other) {
-        // pass
+        // has to be implemented but we dont need it
     }
 }
