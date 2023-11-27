@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/home/gilgames/IdeaProjects/hu-gs</OriginalElement>
+  <nodes>
+    <node x="2011.4285714285716" y="1004.0">engine.components.SideBound</node>
+    <node x="-92.0" y="809.0">engine.listeners.CollisionListener</node>
+    <node x="1256.0" y="1435.0">window.KeyHandler</node>
+    <node x="1491.4285714285716" y="1073.0">engine.components.Transform</node>
+    <node x="501.92857142857156" y="2182.91509167842">window.Window</node>
+    <node x="94.92857142857156" y="2455.91509167842">scene.App</node>
+    <node x="902.4285714285716" y="772.0">engine.components.GameComponent</node>
+    <node x="505.92857142857156" y="2075.91509167842">scene.levels.Level6</node>
+    <node x="420.42857142857156" y="1038.5">engine.components.Entity</node>
+    <node x="180.42857142857156" y="1061.5">engine.components.Intersection</node>
+    <node x="368.92857142857156" y="2075.91509167842">scene.levels.Level5</node>
+    <node x="896.4285714285716" y="1038.5">engine.components.BoxCollider</node>
+    <node x="-121.57142857142844" y="1316.45754583921">util.Rectangle</node>
+    <node x="642.9285714285716" y="2075.91509167842">scene.levels.DebugLevel</node>
+    <node x="729.9285714285716" y="2182.91509167842">scene.Loader</node>
+    <node x="1024.1785714285716" y="1328.0">engine.components.Cake</node>
+    <node x="919.0" y="1435.0">engine.GameObject</node>
+    <node x="772.1785714285716" y="1328.0">engine.components.Trampoline</node>
+    <node x="-71.57142857142844" y="1004.0">engine.components.Player</node>
+    <node x="1060.9285714285716" y="2182.91509167842">util.Coord</node>
+    <node x="231.92857142857156" y="2075.91509167842">scene.levels.Level2</node>
+    <node x="1148.4285714285716" y="981.0">engine.components.Rigidbody</node>
+    <node x="656.4285714285716" y="1073.0">engine.components.Sprite</node>
+    <node x="806.9285714285716" y="2075.91509167842">scene.levels.Level1</node>
+    <node x="943.9285714285716" y="2075.91509167842">scene.levels.Level3</node>
+    <node x="94.92857142857156" y="2075.91509167842">scene.levels.Level4</node>
+    <node x="438.92857142857156" y="1567.9150916784204">scene.World</node>
+    <node x="1525.0" y="1435.0">window.Panel</node>
+    <node x="1771.4285714285716" y="1084.5">engine.components.Box</node>
+    <node x="2060.9285714285716" y="2182.91509167842">scene.LevelSaveEntry</node>
+    <node x="94.92857142857156" y="2182.91509167842">scene.Menu</node>
+    <node x="1296.9285714285716" y="2182.91509167842">scene.Prefabs</node>
+    <node x="1753.9285714285716" y="2182.91509167842">window.MouseHandler</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="engine.components.Transform" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="0.0" y="-56.5" />
+      <point x="1621.4285714285716" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="scene.levels.Level1" target="scene.World" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="865.4285714285716" y="2050.91509167842" />
+      <point x="564.4285714285716" y="2050.91509167842" />
+      <point x="0.0" y="229.0" />
+    </edge>
+    <edge source="engine.components.SideBound" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="0.0" y="-125.5" />
+      <point x="2106.4285714285716" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="engine.components.BoxCollider" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="0.0" y="-91.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="scene.levels.Level2" target="scene.World" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="290.42857142857156" y="2050.91509167842" />
+      <point x="564.4285714285716" y="2050.91509167842" />
+      <point x="0.0" y="229.0" />
+    </edge>
+    <edge source="engine.components.Cake" target="engine.components.BoxCollider" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="1136.6785714285716" y="1303.0" />
+      <point x="1012.4285714285716" y="1303.0" />
+      <point x="0.0" y="91.0" />
+    </edge>
+    <edge source="scene.levels.Level5" target="scene.World" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="427.42857142857156" y="2050.91509167842" />
+      <point x="564.4285714285716" y="2050.91509167842" />
+      <point x="0.0" y="229.0" />
+    </edge>
+    <edge source="scene.levels.Level6" target="scene.World" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="0.0" y="229.0" />
+    </edge>
+    <edge source="scene.levels.Level3" target="scene.World" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="1002.4285714285716" y="2050.91509167842" />
+      <point x="564.4285714285716" y="2050.91509167842" />
+      <point x="0.0" y="229.0" />
+    </edge>
+    <edge source="scene.levels.Level4" target="scene.World" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="153.42857142857156" y="2050.91509167842" />
+      <point x="564.4285714285716" y="2050.91509167842" />
+      <point x="0.0" y="229.0" />
+    </edge>
+    <edge source="engine.components.Rigidbody" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="0.0" y="-148.5" />
+      <point x="1309.9285714285716" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="engine.components.Trampoline" target="engine.components.BoxCollider" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="888.1785714285716" y="1303.0" />
+      <point x="1012.4285714285716" y="1303.0" />
+      <point x="0.0" y="91.0" />
+    </edge>
+    <edge source="scene.levels.DebugLevel" target="scene.World" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="714.9285714285716" y="2050.91509167842" />
+      <point x="564.4285714285716" y="2050.91509167842" />
+      <point x="0.0" y="229.0" />
+    </edge>
+    <edge source="engine.components.Intersection" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="0.0" y="-68.0" />
+      <point x="290.42857142857156" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="engine.components.Player" target="engine.listeners.CollisionListener" relationship="REALIZATION">
+      <point x="-58.0" y="-125.5" />
+      <point x="-13.571428571428442" y="956.0" />
+      <point x="24.0" y="956.0" />
+      <point x="0.0" y="42.5" />
+    </edge>
+    <edge source="engine.components.Player" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="58.0" y="-125.5" />
+      <point x="102.42857142857156" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="engine.components.Entity" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="-1.1368683772161603E-13" y="-91.0" />
+      <point x="528.4285714285714" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="engine.components.Sprite" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="0.0" y="-56.5" />
+      <point x="766.4285714285716" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="engine.components.Box" target="engine.components.GameComponent" relationship="GENERALIZATION">
+      <point x="0.0" y="-45.0" />
+      <point x="1881.4285714285716" y="956.0" />
+      <point x="1012.4285714285716" y="956.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.36865640599001664" showDependencies="false" x="963.7878702397752" y="1724.7751763046547" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
