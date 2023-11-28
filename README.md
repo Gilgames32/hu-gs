@@ -1,5 +1,6 @@
 # [HU-GS](https://github.com/Gilgames32/hu-gs)
-*HU-GS Universe - Ghost Screens*
+**HU-GS Universe - Ghost Screens**
+<sup><sup><sup>The cake is a lie!</sup></sup></sup>
 
 ## Controls
 Move sideways with A and D, jump with W or Space.
@@ -10,4 +11,4 @@ You cannot move windows if an entity is in multiple windows at the same time.
 
 Good luck!
 
-<sup><sup><sup>The cake is a lie!</sup></sup></sup>
+Special thanks to **Acrazit**, for level ideas, the robot and the platform sprites, and the icon!
