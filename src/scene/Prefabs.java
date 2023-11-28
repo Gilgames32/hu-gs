@@ -29,7 +29,7 @@ public class Prefabs {
         player.addComponent(new Player());
         player.addComponent(new Rigidbody());
         player.addComponent(new Entity());
-        player.addComponent(new Sprite("./assets/robko.png"));
+        player.addComponent(new Sprite("robko.png"));
         return player;
     }
 
@@ -44,7 +44,7 @@ public class Prefabs {
     public static GameObject cakePrefab(int x, int y, GameObject parent) {
         GameObject cake = new GameObject(x, y, parent);
         cake.addComponent(new Transform(20, 16));
-        cake.addComponent(new Sprite("./assets/thecakeisalie.png"));
+        cake.addComponent(new Sprite("thecakeisalie.png"));
         cake.addComponent(new Cake());
         return cake;
     }
@@ -63,7 +63,7 @@ public class Prefabs {
         GameObject platform = new GameObject(x, y, parent);
         platform.addComponent(new Transform(sizex, sizey, 0, 0));
         platform.addComponent(new BoxCollider());
-        platform.addComponent(new Sprite("./assets/platform.png"));
+        platform.addComponent(new Sprite("platform.png"));
         return platform;
     }
 
@@ -94,7 +94,7 @@ public class Prefabs {
         GameObject platform = new GameObject(x, y, parent);
         platform.addComponent(new Transform(sizex, sizey, 0, 0));
         platform.addComponent(new Trampoline());
-        platform.addComponent(new Sprite("./assets/trampoline.png"));
+        platform.addComponent(new Sprite("trampoline.png"));
         return platform;
     }
 }

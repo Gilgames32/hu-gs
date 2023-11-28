@@ -16,6 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import assets.AssetLoader;
+
 import javax.swing.DefaultComboBoxModel;
 
 import window.Window;
@@ -41,7 +44,7 @@ public class Menu extends JFrame {
         setResizable(false);
 
         // icon
-        icon = new ImageIcon("./assets/icon.png");
+        icon = new ImageIcon(AssetLoader.getAsset("icon.png"));
         setIconImage(icon.getImage());
 
         // title

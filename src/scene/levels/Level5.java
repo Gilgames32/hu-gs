@@ -23,7 +23,7 @@ public class Level5 extends World {
         Window w1 = new Window("▇▅▆▇▆▅▅█", new Rectangle(200, 0, 275, 300));
         Window w2 = new Window("Entrance hidden by terrible Swing UI", new Rectangle(-200, 0, 400, 300));
 
-        Prefabs.imagePrefab(-55, -100, "./assets/l5_bg.png", w1.panel.gameObject);
+        Prefabs.imagePrefab(-55, -100, "l5_bg.png", w1.panel.gameObject);
 
         w1.panel.bounds.get(WindowSide.SOUTH).freeze();
         w1.panel.bounds.get(WindowSide.WEST).freeze();

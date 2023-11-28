@@ -19,7 +19,7 @@ public class Level2 extends World {
         Window w1 = new Window("cheffs kiss", new Rectangle(-400, 0, 400, 300));
         Window w2 = new Window("do they really?", new Rectangle(400, 0, 400, 300));
 
-        Prefabs.imagePrefab(225, -100, "./assets/l2_bg.png", w1.panel.gameObject);
+        Prefabs.imagePrefab(225, -100, "l2_bg.png", w1.panel.gameObject);
 
         GameObject player = Prefabs.playerPrefab(200, 150, root);
         player.position = player.position.add(w1.panel.rect.toCoord());

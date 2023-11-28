@@ -17,7 +17,7 @@ public class Level1 extends World {
     @Override
     public void start() {
         // this first so its the background
-        GameObject bg = Prefabs.imagePrefab(0, -50, "./assets/l1_bg.png", root);
+        GameObject bg = Prefabs.imagePrefab(0, -50, "l1_bg.png", root);
 
         Window mainWindow = new Window("WASD SPACE", new Rectangle(0, 0, 400, 300));
         GameObject main = mainWindow.panel.gameObject;

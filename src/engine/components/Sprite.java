@@ -3,10 +3,8 @@ package engine.components;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
-import javax.imageio.ImageIO;
-
+import assets.AssetLoader;
 import util.Coord;
 import util.Rectangle;
 
@@ -18,14 +16,10 @@ public class Sprite extends GameComponent {
     /**
      * Parameterized constructor
      * 
-     * @param imagePath path to the image file
+     * @param fileName path to the image file
      */
-    public Sprite(String imagePath) {
-        try {
-            image = ImageIO.read(new File(imagePath));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public Sprite(String fileName) {
+        image = AssetLoader.getAsset(fileName);
     }
 
     /**
