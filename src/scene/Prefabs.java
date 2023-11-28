@@ -3,8 +3,8 @@ package scene;
 import engine.GameObject;
 import engine.components.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
+
+import assets.AssetLoader;
 
 public class Prefabs {
 
@@ -72,17 +72,12 @@ public class Prefabs {
      * 
      * @param x        x position
      * @param y        y position
-     * @param filePath path to the image file
+     * @param fileName name of the image file
      * @param parent   parent GameObject
      * @return the sprite's GameObject
      */
-    public static GameObject imagePrefab(int x, int y, String filePath, GameObject parent) {
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File(filePath));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static GameObject imagePrefab(int x, int y, String fileName, GameObject parent) {
+        BufferedImage img = AssetLoader.getAsset(fileName);
 
         GameObject platform = new GameObject(x, y, parent);
         platform.addComponent(new Transform(img.getWidth(), img.getHeight(), 0, 0));
