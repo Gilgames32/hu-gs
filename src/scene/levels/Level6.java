@@ -14,7 +14,7 @@ import window.Window;
 
 public class Level6 extends World {
     public Level6() {
-        name = "Level6";
+        name = "6 - Siso";
     }
 
     @Override

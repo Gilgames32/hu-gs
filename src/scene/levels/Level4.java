@@ -16,7 +16,7 @@ import engine.components.SideBound.WindowSide;
  */
 public class Level4 extends World {
     public Level4() {
-        name = "Level4";
+        name = "4 - Tuoo";
     }
 
     @Override

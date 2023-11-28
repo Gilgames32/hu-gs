@@ -11,7 +11,7 @@ import window.Window;
  */
 public class Level3 extends World {
     public Level3() {
-        name = "Level3";
+        name = "3 - Clon";
     }
 
     @Override
